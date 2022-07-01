@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Em Construção..." />
+    <meta name="author" content="Yuri Eduardo" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/all.css" rel="stylesheet">
+    <link rel="shortcut icon" type="/image/icon" href="/images/Icon.png" />
+    <title>Concredito Dashboard</title>
+  </head>
+  <body>
+    <div style="position: relative; background-image: linear-gradient(to bottom right, #08436b, #52cbcf); width: 100vw; height: 100vh">
+      <div style="position: absolute; top: 43vh; left: 50%; margin-top: 0vh; margin-left: -2vh; text-align: center">
+        <div class="loader-wheel"></div>
+        <div class="loader-text font-5"></div>
+      </div>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script>
+      function load() {
+        document.documentElement.className = 'orange'
+        if (localStorage.getItem('user') && localStorage.getItem('password')) {
+          $.ajax({ type: "post", url: `https://api.concredito.com.br/verifyLogin`, data: JSON.stringify({ user: localStorage.getItem('user'), password: localStorage.getItem('password')}), contentType:"application/json; charset=utf-8",
+            success: function(s) {
+              if (s.error) return $(document.body).load(`./pages/login.html`, function(response, status, xhr) { })
+              if (window.location.pathname.split('/')[1] == "logout" && localStorage.getItem('user') && localStorage.getItem('password')) {
+                localStorage.setItem('user', '')
+                localStorage.setItem('password', '')
+                window.location = "/login"
+                return $(document.body).load(`./pages/login.html`, function(response, status, xhr) { })
+              } else return $(document.body).load(`./pages/${window.location.pathname.split('/')[1] ? window.location.pathname.split('/')[1] : 'dashboard'}.html`, function(response, status, xhr) {
+                if (status == "error") return $(document.body).load(`./pages/dashboard.html`)
+              })
+            },
+            error: function(e) { return $(document.body).load(`./pages/login.html`, function(response, status, xhr) { }) }
+          });
+        } else return $(document.body).load(`./pages/login.html`, function(response, status, xhr) { })
+      }(function () {
+        load()
+      })()
+    </script>
+  </body>
+</html>
