@@ -126,9 +126,10 @@
     checkeds = []
     if (document.getElementById('cadastrar').classList.contains('buttonBlock')) return alert('Aguarde...')
     document.getElementById('refresh').style.cursor = "not-allowed"
+    document.getElementById('cadastrar').classList.add("buttonBlock");
     document.getElementById('propostas').innerHTML = `<div style="position: absolute; top: 20vh; left: 50%; margin-top: 0vh; margin-left: -2vh"><div class="loader-wheel"></div><div class="loader-text font-5"></div></div>`
     document.getElementById('selectAll').checked = false
-    $.ajax({ type: "post",url: `https://api.concredito.com.br/refresh`,
+    $.ajax({ type: "post",url: `http://localhost:3000/refresh`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password') 
@@ -183,7 +184,7 @@
       document.getElementById(`situacao${element.index}`).value = `Iniciando Cadastro...`
       document.getElementById(`situacaoTitle${element.index}`).title = `Iniciando Cadastro...`
       setTimeout(function(){ checkSituation(element, element.index, "Aguardando Cadastro...", true) }, 500)
-      $.ajax({ type: "post",url: `https://api.concredito.com.br/cadastrar`,
+      $.ajax({ type: "post",url: `http://localhost:3000/cadastrar`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -214,7 +215,7 @@
     })
   }
   function checkSituation(element, index, situation, action) {
-    $.ajax({ type: "post", url: `https://api.concredito.com.br/verifySituation`,
+    $.ajax({ type: "post", url: `http://localhost:3000/verifySituation`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),

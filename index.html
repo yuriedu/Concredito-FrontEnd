@@ -21,7 +21,7 @@
       function load() {
         document.documentElement.className = 'orange'
         if (localStorage.getItem('user') && localStorage.getItem('password')) {
-          $.ajax({ type: "post", url: `https://api.concredito.com.br/verifyLogin`, data: JSON.stringify({ user: localStorage.getItem('user'), password: localStorage.getItem('password')}), contentType:"application/json; charset=utf-8",
+          $.ajax({ type: "post", url: `http://localhost:3000/verifyLogin`, data: JSON.stringify({ user: localStorage.getItem('user'), password: localStorage.getItem('password')}), contentType:"application/json; charset=utf-8",
             success: function(s) {
               if (s.error) return $(document.body).load(`./pages/login.html`, function(response, status, xhr) { })
               if (window.location.pathname.split('/')[1] == "logout" && localStorage.getItem('user') && localStorage.getItem('password')) {

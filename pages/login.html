@@ -25,7 +25,7 @@
     if (!user || !password) return alert('Coloque seu usuário e senha...')
     if (document.getElementById('login').classList.contains('buttonBlock')) return alert('Aguarde...')
     document.getElementById('login').classList.add("buttonBlock");
-    $.ajax({ type: "post", url: `https://api.concredito.com.br/verifyLogin`, data: JSON.stringify({ user: user, password: password }), contentType:"application/json; charset=utf-8",
+    $.ajax({ type: "post", url: `http://localhost:3000/verifyLogin`, data: JSON.stringify({ user: user, password: password }), contentType:"application/json; charset=utf-8",
       success: function(s) {
         document.getElementById('login').classList.remove("buttonBlock");
         if (s.error) return alert(s.error)
