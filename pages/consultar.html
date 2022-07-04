@@ -1,39 +1,87 @@
 <navbar id="navbar"></navbar>
+<script>$("#navbar").load(`./pages/imports/navbar.html`, function(response, status, xhr) { })</script>
 <div class="bodyConsultas left17" style="position: relative; top: 10vh; left: 4.5vw">
-  <div class="background-Propostas left16-5 width60" style="position: absolute; left: 22.75vw; top: 20vh; width: 50vw; border-radius: 3vh">
-    <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 5vh">    
-      <a>Consultas de FGTS:</a>
-    </div>
-    <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
-      <fieldset class="font-size2" title="Selecione o Banco..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
-        <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend>
-        <select id="banks" onchange="setBank(this.value)" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 40vw; background: transparent; border:none; border: 0; font-weight: 400;">
-          <option value="false" style="color: black;" selected>Não Selecionado</option>
-          <option value="FACTA FINANCEIRA" style="color: black; font-weight: 600;">Facta Financeira</option>
-          <option value="BANCO C6" style="color: black; font-weight: 600;">Banco C6</option>
-          <option value="PANAMERICANO" style="color: black; font-weight: 600">Panamericano</option>
-          <option value="SAFRA" style="color: black; font-weight: 600;">Safra</option>
-          <option value="MERCANTIL" style="color: black; font-weight: 600;">Mercantil</option>
-          <option value="BMG" style="color: black; font-weight: 600;" >BMG</option>
-        </select>
-      </fieldset>
-    </div>
-    <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
-      <fieldset class="font-size2" title="Coloque o CPF..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
-        <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend>
-        <input id="cpf" class="font-1 font-color" placeholder="000.000.000-00" style="width: 30vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
-      </fieldset>
-    </div>
-    <div id="options" style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
-    
-    </div>
-    <div style="width: 100%; display: flex; justify-content: center; margin-top: 4vh; margin-bottom: 5vh; font-weight: 600;">
-      <a id="consultar" onclick="consultar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Consultar</a>
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2" style="position: absolute; left: 22.75vw; top: 19vh; width: 50vw; border-radius: 3vh;">
+    <div style="max-height: 70vh; overflow-y: auto; margin-block: 2vh;">
+      <div id="novaConsulta">
+        <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
+          <a>Consultas de FGTS:</a>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Selecione o Banco..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend>
+            <select id="banks" onchange="setBank(this.value)" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 40vw; background: transparent; border:none; border: 0; font-weight: 400;">
+              <option value="false" style="color: black;" selected>Não Selecionado</option>
+              <option value="FACTA FINANCEIRA" style="color: black; font-weight: 600;">Facta Financeira</option>
+              <option value="BANCO C6" style="color: black; font-weight: 600;">Banco C6</option>
+              <option value="PANAMERICANO" style="color: black; font-weight: 600">Panamericano</option>
+              <option value="SAFRA" style="color: black; font-weight: 600;">Safra</option>
+              <option value="MERCANTIL" style="color: black; font-weight: 600;">Mercantil</option>
+              <option value="BMG" style="color: black; font-weight: 600;" >BMG</option>
+            </select>
+          </fieldset>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Coloque o CPF..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend>
+            <input id="cpf" class="font-1 font-color" placeholder="000.000.000-00" style="width: 30vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+          </fieldset>
+        </div>
+        <div id="options" style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+        
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 4vh;font-weight: 600;">
+          <a id="consultar" onclick="consultar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Consultar</a>
+        </div>
+      </div>
+      <div id="resultConsulta" style="display: none">
+        <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 2vh">    
+          <a>Resultado do Saldo FGTS:</a>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Coloque o CPF..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4 font-size2" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend>
+            <input id="cpfResult" class="font-1 font-color" placeholder="000.000.000-00" style="width: 30vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled>
+          </fieldset>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend id="liberadoName" class="font-4 font-size2" style="font-weight: 800; margin: 0; padding: 0; font-size: 2.3vh">Saldo Liberado</legend>
+            <input id="liberadoResult" class="font-1 font-color" placeholder="000.00" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled>
+          </fieldset>
+          <fieldset class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend id="totalName" class="font-4 font-size2" style="margin: 0; padding: 0; font-size: 2.3vh">Saldo Total</legend>
+            <input id="totalResult" class="font-1 font-color" placeholder="000.00" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled>
+          </fieldset>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend id="dataName" class="font-4 font-size2" style="margin: 0; padding: 0; font-size: 2.3vh">Data da Solicitação</legend>
+            <input id="dataResult" class="font-1 font-color" placeholder="00/00/0000" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled>
+          </fieldset>
+          <fieldset class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend id="parcName" class="font-4 font-size2" style="margin: 0; padding: 0; font-size: 2.3vh">Parcelas Adiantadas</legend>
+            <input id="parcResult" class="font-1 font-color" placeholder="00" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled>
+          </fieldset>
+        </div>
+        <div style="width: 100%; text-align: center; margin-top: 2vh">
+          <a class="font-2" style="font-weight: 600; padding: 0; font-size: 2.3vh;">Parcelas:</a>
+        </div>
+        <div id="parcs" class="borderColor" style="min-height: 8vh; margin-block: 1vh; margin-inline: 10%; width: 80%; border-radius: 1.5vh">
+          <div class="line-bottom" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;">
+            <input onclick="toggle(this)" type="checkbox" style="width: 10%; height: 2vh; margin: 0">
+            <a style="width: 50%;">Data</a>
+            <a style="width: 40%;">Valor</a>
+          </div>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-block: 3vh; font-weight: 600;">
+          <a id="consultar" onclick="openNewCpf()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Consultar novo CPF</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 <script>
-  $("#navbar").load(`./pages/imports/navbar.html`, function(response, status, xhr) { })
   var banks = [
     { name:'FACTA FINANCEIRA', options:'<fieldset class="font-size2" title="Selecione a Tabela..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 35vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Tabela</legend><select id="option1"  class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 35vw; background: transparent; border:none; border: 0; font-weight: 400;"><option value="GOLD" style="color: black; font-weight: 600;">Gold</option><option value="NORMAL" style="color: black; font-weight: 600;">Normal</option></select></fieldset>' },
     { name:'BANCO C6', options:'<fieldset class="font-size2" title="Selecione o Tipo..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Tipo</legend><select id="option1" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 20vw; background: transparent; border:none; border: 0; font-weight: 400;"><option value="POR_VALOR_TOTAL" style="color: black; font-weight: 600;">Valor Total</option><option value="POR_VALOR_SOLICITADO" style="color: black; font-weight: 600;">Valor Solicitado</option><option value="POR_QUANTIDADE_DE_PARCELAS" style="color: black; font-weight: 600;">Quantidade de Parcelas</option></select></fieldset><fieldset class="font-size2" title="Coloque o Valor..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Valor</legend><input id="option2" class="font-1 font-color" type="number" placeholder="000.00" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0"></fieldset>' },
@@ -50,7 +98,7 @@
     } else document.getElementById('options').innerHTML = ``
   }
   function consultar() {
-    if (document.getElementById('consultar').classList.contains('buttonBlock')) return alert('Sua consulta já está na fila! Aguarde um pouco por favor...')
+    if (document.getElementById('consultar').classList.contains('buttonBlock')) return alert('Sua consulta já está na fila! Aguarde um pouco, por favor...')
     if (!document.getElementById('banks').value || document.getElementById('banks').value == 'false') return alert('Selecione o banco em que será feito a consulta!')
     if (!document.getElementById('cpf').value) return alert('Colque o CPF que será consultado!')
     document.getElementById('cpf').value = document.getElementById('cpf').value.replace(".","").replace(".","").replace("-","")
@@ -60,19 +108,49 @@
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
-        cpf: document.getElementById('cpf'),
+        cpf: document.getElementById('cpf').value,
+        bank: document.getElementById('banks') && document.getElementById('banks').value != 'false' ? document.getElementById('banks').value : false,
         option1: document.getElementById('option1') ? document.getElementById('option1').value : false,
         option2: document.getElementById('option2') ? document.getElementById('option2').value : false,
       }), contentType:"application/json; charset=utf-8",
       success: async function(s) {
-        alert(foi)
+        if (s.error) {
+          document.getElementById('consultar').classList.remove("buttonBlock");
+          return alert(s.error)
+        }
+        document.getElementById('cpfResult').value = s.cpf
+        document.getElementById('totalResult').value = s.saldoTotal
+        document.getElementById('liberadoResult').value = s.saldoLiberado
+        document.getElementById('dataResult').value = s.data
+        document.getElementById('parcResult').value = s.parcelas.length
+        document.getElementById('parcs').innerHTML = `<div class="line-bottom" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;"><input onclick="toggle(this)" type="checkbox" style="width: 10%; height: 2vh; margin: 0"><a style="width: 50%;">Data</a><a style="width: 40%;">Valor</a></div>`
+        s.parcelas.forEach((element)=>{
+          document.getElementById('parcs').innerHTML += `<div class="line-top" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;"><input type="checkbox" style="width: 10%; height: 2vh; margin: 0"><a class="font-size2" style="width: 50%;">${element.data}</a><a class="font-size2" style="width: 40%;">${element.valor}</a></div>`
+        })
+        if (screen.width <= 900) {
+          document.getElementById('cpfResult').value = s.cpf
+          document.getElementById('totalName').innerHTML = "Total"
+          document.getElementById('liberadoName').innerHTML = "Liberado"
+          document.getElementById('dataName').innerHTML = "Data"
+          document.getElementById('parcName').innerHTML = "Parcelas"
+        }
+        document.getElementById('novaConsulta').style.display = 'none'
+        document.getElementById('resultConsulta').style.display = 'inline'
+        document.getElementById('changeTop').style.top = '8vh'
+        document.getElementById('consultar').classList.remove("buttonBlock");
       },
       error: function(e) {
+        document.getElementById('consultar').classList.remove("buttonBlock");
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
         return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
       }
     })
-  }(function () {
-    
+  } function openNewCpf() {
+    document.getElementById('changeTop').style.top = '19vh'
+    document.getElementById('novaConsulta').style.display = 'inline'
+    document.getElementById('resultConsulta').style.display = 'none'
+  }
+  (function () {
+
   })();
 </script>

@@ -114,10 +114,13 @@
   width: 95.5vw;
   height: 88vh
 }
+
+.borderColor { color: var(--color); border: 0.1vh solid var(--color) }
+.line-bottom { border-bottom: 0.1vh solid rgba(var(--color-code), 0.3) }
+.line-top { border-top: 0.1vh solid rgba(var(--color-code), 0.3) }
+
 .width5 { width: 4.5vw; min-width: 4.5vw; }
 .height5vw { height: 5vw }
-
-.line-bottom { border-bottom: 0.1vh solid rgba(var(--color-code), 0.3) }
 
 .visibleAndroid { display: none }
 @media screen and (max-width: 900px) {
@@ -134,9 +137,9 @@
   .width27-5 { width: 27.5vw!important; }  /* */
   .width35 { width: 35vw!important; }
   .width40 { width: 40vw!important; }
-  .width60 { width: 60vw!important; }
   .width56-5 { width: 56.5vw!important; max-width: 56.5vw!important } /* */
   .width66-5 { width: 66.5vw!important; max-width: 66.5vw!important } /* */
+  .width70 { width: 70vw!important; }
   .width74 { width: 74vw!important; }
   .width77 { width: 77vw!important; }
   .width79 { width: 79vw!important; max-width: 79vw!important; }
@@ -148,7 +151,7 @@
   .max-width18 { max-width: 18vw!important }
   .left10 { left: 10vw!important; }
   .left17 { left: 17vw!important; }
-  .left16-5 { left: 11.5vw!important; }
+  .left16-5 { left: 6.5vw!important; }
   .width10 { width: 6vw!important }
   .margin-left7-5 { margin-left: 7.5vw!important }
   .margin-top2 { margin-top: 2vh!important }
@@ -186,6 +189,7 @@
   position: absolute;
   border-radius: 1vh;
 }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus,
