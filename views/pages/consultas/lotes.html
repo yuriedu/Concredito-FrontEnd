@@ -148,7 +148,7 @@
       return nextCpf(i, bank)
     }
 
-    $.ajax({ type: "post",url: `http://localhost:3000/consultas/fgts`,
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/consultas/fgts`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
