@@ -1,0 +1,201 @@
+<navbar id="navbar"></navbar>
+<script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
+<div class="bodyConsultas left17 top10" style="position: relative; top: 0vh; left: 4.5vw">
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top10" style="position: relative; left: 25vw; top: 19vh; width: 50vw; border-radius: 3vh; padding-top: 1vh">
+    <div style="margin-block: 2vh;">
+      <div id="novaConsulta">
+        <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
+          <a>Lotes de FGTS:</a>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Coloque os CPF's..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF's</legend>
+            <textarea rows="4" id="cpfs" class="font-size1-5 font-1 font-color" placeholder="000.000.000-00,&#10;000.000.000-00,&#10;000.000.000-00,&#10;000.000.000-00" style="width: 30vw; margin: 0; font-size: 2.3vh; background: transparent; border: 0"></textarea>
+          </fieldset>
+        </div>
+        <div style="width: 50%; margin-left: 25%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Selecione o Banco..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Bancos</legend>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="FACTA FINANCEIRA" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">FACTA</a>
+            </div>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="BANCO C6" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">C6</a>
+            </div>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="PANAMERICANO" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">PANAMERICANO</a>
+            </div>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="SAFRA" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">SAFRA</a>
+            </div>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="MERCANTIL" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">MERCANTIL</a>
+            </div>
+            <div style="display: flex; width: 100%; height: 4vh; align-items: center">
+              <input onchange="setBank(this.id)" id="BMG" type="checkbox">
+              <a class="font-size1-5" style="font-size: 2.2vh">BMG</a>
+            </div>
+          </fieldset>
+        </div>
+        <div style="display: flex; font-weight: 600; justify-content: center; margin-top: 2vh">
+            <a id="consultar" onclick="consultar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Consultar</a>
+            <a id="consultar" onclick="parar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Parar</a>
+        </div>
+        <div id="filaShow" style="width: 100%; display: flex; justify-content: center; font-weight: 600; margin-top: 1vh; margin-left: -0.5vw; min-height: 1vh;"></div>
+      </div>
+    </div>
+  </div>
+  <div class="margin-top15" style="width: 80%; margin-top: 25vh; margin-inline: 10%; padding-bottom: 3vh">
+    <a style="font-size: 3vh; display: flex; justify-content: center">Resultados:</a>
+    <div style="display: flex">
+      <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh;font-weight: 600">
+        <a id="sucessDown" onclick="downloadSucess()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">CSV Sucessos</a>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh;font-weight: 600">
+        <a id="errorsDown" onclick="downloadErrors()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">CSV Erros</a>
+      </div>
+    </div>
+    <div id="resultados" style="width: 100%">
+      
+    </div>
+  </div>
+</div>
+<script>
+  var sucesso = []
+  var erros = []
+  function downloadSucess() {
+    if (sucesso.length <= 0) return alert('A lista de sucesso está vazia...')
+    document.getElementById('sucessDown').classList.add("buttonBlock");
+    var csv = 'Cpf,Banco,Total,Liberado,Data\n';
+    sucesso.forEach(function(element) { csv += `${element.cpf},${element.bank},${element.total},${element.liberado},${element.data}\n`; });
+    var a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    a.target = '_blank';
+    a.download = 'lotesFGTS-Sucessos.csv';
+    a.click();
+    document.getElementById('sucessDown').classList.remove("buttonBlock");
+  }
+  function downloadErrors() {
+    if (sucesso.length <= 0) return alert('A lista de sucesso está vazia...')
+    document.getElementById('errorsDown').classList.add("buttonBlock");
+    var csv = 'Cpf,Banco,Erro\n';
+    erros.forEach(function(element) { csv += `${element.cpf},${element.bank},${element.error}\n`; });
+    var a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    a.target = '_blank';
+    a.download = 'lotesFGTS-Erros.csv';
+    a.click();
+    document.getElementById('errorsDown').classList.remove("buttonBlock");
+  }
+  var banks = [
+    { name: 'FACTA FINANCEIRA', active: false, option1: 'GOLD' },
+    { name: 'BANCO C6', active: false, option1: 'POR_VALOR_TOTAL' },
+    { name: 'PANAMERICANO', active: false, option1: 'POR_VALOR_TOTAL' },
+    { name: 'SAFRA', active: false, option1: '1' },
+    { name: 'MERCANTIL', active: false, option1: 'POR_VALOR_TOTAL' },
+    { name: 'BMG', active: false, option1: false },
+  ]
+  function setBank(bank) {
+    if (document.getElementById('consultar').classList.contains('buttonBlock')) return alert('Aguarde seu lote acabar para editar os bancos...')
+    if (banks.find(r=>r.name==bank)) {
+      if (banks.find(r=>r.name==bank).active) {
+        banks.find(r=>r.name==bank).active = false
+      } else banks.find(r=>r.name==bank).active = true
+    } else return alert(`Banco: ${bank} não encontrado...`)
+  }
+  var cpfs = []
+  function parar() {
+    if (cpfs.length <= 0) return alert("A lista de CPF's já está vazia...")
+    cpfs = []
+    return alert("A lista de CPF's foi limpa! Aguarde o cpf que estão sendo consultado terminar...")
+  }
+  async function consultar() {
+    cpfs = []
+    if (document.getElementById('consultar').classList.contains('buttonBlock')) return alert('Sua consulta já está na fila! Aguarde um pouco, por favor...')
+    if (!document.getElementById('FACTA FINANCEIRA').value && !document.getElementById('BANCO C6').value && !document.getElementById('PANAMERICANO').value && !document.getElementById('SAFRA').value && !document.getElementById('MERCANTIL').value && !document.getElementById('BMG').value) return alert('Selecione algum banco em que será feito a consulta!')
+    if (!document.getElementById('cpfs').value) return alert("Colque os CPF's que será consultado!")
+    cpfs = await document.getElementById('cpfs').value.replace(/\r?\n|\r/g, "").split(",");
+    if (cpfs.length < 1) return alert("Lista de Cpf's invalido...")
+    if (banks.filter(r=>r.active).length < 1) return alert('Selecione algum banco que seja valido...')
+    document.getElementById('consultar').classList.add("buttonBlock");
+    banks.filter(r=>r.active).forEach((bank)=>{
+      if (!cpfs[0]) return;
+      consultarCPF(cpfs[0], 0, bank)
+    })
+  }
+  function consultarCPF(cpf, i, bank) {
+    if (!cpf) return nextCpf(i, bank)
+    cpf = cpf.replace('.',"").replace('.',"").replace('-','')
+    cpf = cpf.length == 10 ? `0${cpf}` : cpf.length == 9 ? `00${cpf}` : cpf.length == 8 ? `000${cpf}` : cpf.length == 7 ? `0000${cpf}` : cpf.length == 6 ? `00000${cpf}` : cpf
+    if (sucesso.find(r=>r.cpf == cpf && r.bank == bank.name)) {
+      return nextCpf(i, bank)
+    }
+    if (erros.find(r=>r.cpf == cpf && r.bank == bank.name)) {
+      return nextCpf(i, bank)
+    }
+    if (!Number(cpf) || cpf.length != 11) {
+      if (document.getElementById(`${cpf}`)) {
+        document.getElementById(`banks-${cpf}`).innerHTML += `<div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="Cpf invalido..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 58%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Erro</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="Cpf invalido..." disabled></fieldset></div>`
+      } else {
+        document.getElementById('resultados').innerHTML += `<div id="${cpf}" class="background-Propostas" style="width: 80%; margin-inline: 10%; border-radius: 2vh; padding-top: 1vh; padding-bottom: 2vh; margin-block: 2vh;"><fieldset class="font-size2" title="CPF" style="font-size: 2.4vh; border-radius: 0.6vh; width: 88%; padding: 0; margin: 0; padding-inline: 1%; margin-inline: 5%;"><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${cpf}" disabled></fieldset><div id="banks-${cpf}" style="margin-left: 5%"><div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="Cpf invalido..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 58%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Erro</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="Cpf invalido..." disabled></fieldset></div></div></div>`
+      }
+      erros[erros.length] = { cpf: cpf, bank: bank.name, error: 'Cpf invalido...' }
+      return nextCpf(i, bank)
+    }
+
+    $.ajax({ type: "post",url: `http://localhost:3000/consultas/fgts`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        lotes: true,
+        cpf: cpf,
+        bank: bank.name,
+        option1: bank.option1
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        if (s.error) {
+          if (document.getElementById(`${cpf}`)) {
+            document.getElementById(`banks-${cpf}`).innerHTML += `<div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="${s.error}" style="font-size: 2.4vh; border-radius: 0.6vh; width: 58%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Erro</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.error}" disabled></fieldset></div>`
+          } else {
+            document.getElementById('resultados').innerHTML += `<div id="${cpf}" class="background-Propostas" style="width: 80%; margin-inline: 10%; border-radius: 2vh; padding-top: 1vh; padding-bottom: 2vh; margin-block: 2vh;"><fieldset class="font-size2" title="CPF" style="font-size: 2.4vh; border-radius: 0.6vh; width: 88%; padding: 0; margin: 0; padding-inline: 1%; margin-inline: 5%;"><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${cpf}" disabled></fieldset><div id="banks-${cpf}" style="margin-left: 5%"><div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="${s.error}" style="font-size: 2.4vh; border-radius: 0.6vh; width: 58%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Erro</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.error}" disabled></fieldset></div></div></div>`
+          }
+          if (!s.retry) erros[erros.length] = { cpf: cpf, bank: bank.name, error: s.error }
+        } else {
+          if (document.getElementById(`${cpf}`)) {
+            document.getElementById(`banks-${cpf}`).innerHTML += `<div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="Saldo Total" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Total</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.saldoTotal}" disabled></fieldset><fieldset class="font-size2" title="Saldo Liberado" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Liberado</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.saldoLiberado}" disabled></fieldset></div>`
+          } else {
+            document.getElementById('resultados').innerHTML += `<div id="${cpf}" class="background-Propostas" style="width: 80%; margin-inline: 10%; border-radius: 2vh; padding-top: 1vh; padding-bottom: 2vh; margin-block: 2vh;"><fieldset class="font-size2" title="CPF" style="font-size: 2.4vh; border-radius: 0.6vh; width: 88%; padding: 0; margin: 0; padding-inline: 1%; margin-inline: 5%;"><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${cpf}" disabled></fieldset><div id="banks-${cpf}" style="margin-left: 5%"><div style="display: flex"><fieldset class="font-size2" title="Banco" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%"><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${bank.name}" disabled></fieldset><fieldset class="font-size2" title="Saldo Total" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Total</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.saldoTotal}" disabled></fieldset><fieldset class="font-size2" title="Saldo Liberado" style="font-size: 2.4vh; border-radius: 0.6vh; width: 28%; padding: 0; margin: 0; padding-inline: 1%; margin-left: 1vh; "><legend class="font-4 508.170.780-53" style="margin: 0; padding: 0; font-size: 2.3vh">Liberado</legend><input class="font-size1-5 font-1 font-color" style="margin: 0; width: 100%; font-size: 2.3vh; background: transparent; border: 0" value="${s.saldoLiberado}" disabled></fieldset></div></div></div>`
+          }
+          sucesso[sucesso.length] = { cpf: s.cpf, bank: bank.name, total: s.saldoTotal, liberado: s.saldoLiberado, data: s.data }
+        }
+        return nextCpf(i, bank)
+      },
+      error: function(e) {
+        document.getElementById('consultar').classList.remove("buttonBlock");
+        if (e && e.responseJSON && e.responseJSON.error) {
+          alert(`CPF: ${cpf} - Erro: ${e.responseJSON.error}! Clique em OK para continuar a consulta...`)
+        } else alert(`CPF: ${cpf} - Ocorreu algum erro indefinido! Clique em OK para continuar a consulta...`)
+        return nextCpf(i, bank)
+      }
+    })
+  }
+  var banksEnd = 0
+  async function nextCpf(i, bank) {
+    i += 1
+    if (cpfs[i]) {
+      setTimeout(()=>{ return consultarCPF(cpfs[i], i, bank) }, 1000)
+    } else {
+      banksEnd += 1
+      if (banks.filter(r=>r.active).length == banksEnd) {
+        banksEnd = 0
+        document.getElementById('consultar').classList.remove("buttonBlock");
+        alert('Consulta Finalizada...')
+      }
+    }
+  }
+</script>

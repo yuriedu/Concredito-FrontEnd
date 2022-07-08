@@ -195,7 +195,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       }
     })
   }
@@ -236,7 +236,7 @@
         },
         error: function(e) {
           if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-          return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+          return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
         }
       })
     })
@@ -267,7 +267,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }

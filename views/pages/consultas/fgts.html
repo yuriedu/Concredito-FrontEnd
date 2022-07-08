@@ -1,7 +1,7 @@
 <navbar id="navbar"></navbar>
 <script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
 <div class="bodyConsultas left17" style="position: relative; top: 10vh; left: 4.5vw">
-  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top10" style="position: absolute; left: 22.75vw; top: 19vh; width: 50vw; border-radius: 3vh;">
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top10" style="position: absolute; left: 25vw; top: 19vh; width: 50vw; border-radius: 3vh;">
     <div class="max-height50" style="max-height: 70vh; overflow-y: auto; margin-block: 2vh;">
       <div id="novaConsulta">
         <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
@@ -114,7 +114,7 @@
     if (document.getElementById('cpf').value.length != 11) return alert('O CPF está invalido, verifique e tente novamente...')
     document.getElementById('consultar').classList.add("buttonBlock");
     setTimeout(function(){ verifyQueue(0) }, 500)
-    $.ajax({ type: "post",url: `https://api.concredito.com.br/consultas/fgts`,
+    $.ajax({ type: "post",url: `http://localhost:3000/consultas/fgts`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -152,7 +152,7 @@
       error: function(e) {
         document.getElementById('consultar').classList.remove("buttonBlock");
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       }
     })
   }
@@ -172,7 +172,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       }
     })
   }

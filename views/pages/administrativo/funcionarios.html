@@ -81,7 +81,7 @@
           </div>
           <div id="consultasFGTS">
             <div style="width: 100%; display: flex; margin-top: 3vh">
-              <a class="font-size1-5" style="font-size: 2.3vh; width: 70%">Consultas FGTS:</a>
+              <a id="QuantyFGTS" class="font-size1-5" style="font-size: 2.3vh; width: 70%">Consultas FGTS:</a>
               <div style="width: 30%; display: flex; justify-content: right;">
                 <a onclick="limparFGTS()" class="font-size1-5 font-color-navbar" style="font-size: 2vh; cursor: pointer; text-decoration: underline;">Limpar</a>
               </div>
@@ -150,7 +150,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }
@@ -172,7 +172,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }
@@ -196,7 +196,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }
@@ -217,7 +217,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }
@@ -255,6 +255,7 @@
         consultas: { fgts: false, lotes: false },
       }
       document.getElementById('funcNewPass').value = ''
+      document.getElementById('QuantyFGTS').innerHTML = `Consultas FGTS: <span class="font-color-navbar-reverse">${users[i].counts.consultFgts.length}</span>`
       document.getElementById('funcUser').value = users[i]._id
       document.getElementById(`funcName`).innerHTML = users[i]._id
       if (users[i].permissions.administrativo.funcionarios) {
@@ -373,7 +374,7 @@
       },
       error: function(e) {
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
-        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
   }(function () {

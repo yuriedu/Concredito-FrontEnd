@@ -33,9 +33,9 @@
               localStorage.setItem('password', '')
               return window.location = "/login"
             } else if (window.location.pathname.split('/')[1] && window.location.pathname.split('/')[2]) {
-              $(document.body).load(`/views/pages/${window.location.pathname.split('/')[1]}/${window.location.pathname.split('/')[2]}.html`, function(res, status, xhr) { if (status == "error") return window.location = "/" })
+              $(document.body).load(`/views/pages/${window.location.pathname.split('/')[1]}/${window.location.pathname.split('/')[2]}.html`, function(res, status, xhr) { if (status == "error") return $(document.body).load(`/views/pages/dashboard/destaque.html`) })
             } else if (window.location.pathname.split('/')[1]) {
-              return $(document.body).load(`/views/pages/${window.location.pathname.split('/')[1]}.html`, function(res, status, xhr) { if (status == "error") return window.location = "/" })
+              return $(document.body).load(`/views/pages/${window.location.pathname.split('/')[1]}.html`, function(res, status, xhr) { if (status == "error") return $(document.body).load(`/views/pages/dashboard/destaque.html`) })
             } else return $(document.body).load(`/views/pages/dashboard/destaque.html`)
           },
           error: function(e) { return $(document.body).load(`/views/pages/login.html`) }
