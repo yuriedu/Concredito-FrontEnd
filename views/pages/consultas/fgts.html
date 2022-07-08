@@ -114,7 +114,7 @@
     if (document.getElementById('cpf').value.length != 11) return alert('O CPF está invalido, verifique e tente novamente...')
     document.getElementById('consultar').classList.add("buttonBlock");
     setTimeout(function(){ verifyQueue(0) }, 500)
-    $.ajax({ type: "post",url: `http://localhost:3000/consultas/fgts`,
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/consultas/fgts`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -157,7 +157,7 @@
     })
   }
   function verifyQueue(fila) {
-    $.ajax({ type: "post",url: `http://localhost:3000/consultas/queue`,
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/consultas/queue`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),

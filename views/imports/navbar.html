@@ -156,7 +156,7 @@
       document.getElementById(`dashboard-SideBar`).classList.add('navbar-select');
       document.getElementById(`dashboard-destaque`).classList.add('navbar-sub-select');
     }
-    $.ajax({ type: "post",url: `http://localhost:3000/permissions`,
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/permissions`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -197,7 +197,7 @@
     if (document.getElementById('newPass').value == document.getElementById('oldPass').value) return alert('Você colocou a nova senha igual sua atual...')
     if (document.getElementById('newPass').value !== document.getElementById('repeatPass').value) return alert('Você repetiu a senha errado...')
     document.getElementById('savePassword').classList.add("buttonBlock");
-    $.ajax({ type: "post",url: `http://localhost:3000/administrativo/edit`,
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/administrativo/edit`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: document.getElementById('oldPass').value,

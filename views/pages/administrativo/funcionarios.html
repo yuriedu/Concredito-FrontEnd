@@ -137,7 +137,7 @@
     if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
     if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
     document.getElementById('newUserFuncs').classList.add('buttonBlock')
-    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/criar`,
+    $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/criar`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -160,7 +160,7 @@
     if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
     if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
     document.getElementById('deletarFuncs').classList.add('buttonBlock')
-    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/deletar`,
+    $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/deletar`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -182,7 +182,7 @@
     if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
     if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
     document.getElementById('salvarFuncs').classList.add('buttonBlock')
-    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/edit`,
+    $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/edit`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -204,7 +204,7 @@
   function limparFGTS() {
     if (document.getElementById('deletarFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
     document.getElementById('deletarFuncs').classList.add('buttonBlock')
-    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/limpar`,
+    $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/limpar`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -359,7 +359,7 @@
 <script>
   var users = []
   function getFuncionarios() {
-    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/funcionarios`,
+    $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/funcionarios`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password')

@@ -21,7 +21,7 @@
       function load() {
         document.documentElement.className = 'orange'
         if (!localStorage.getItem('user') || !localStorage.getItem('password')) return $(document.body).load(`/views/pages/login.html`)
-        $.ajax({ type: "post", url: `http://localhost:3000/login`,
+        $.ajax({ type: "post", url: `https://api.concredito.com.br/login`,
           data: JSON.stringify({
             user: localStorage.getItem('user'),
             password: localStorage.getItem('password')
