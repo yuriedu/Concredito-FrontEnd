@@ -134,7 +134,6 @@
   }
   function createNewUser() {
     if (document.getElementById('newUserFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
-    if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
     if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
     document.getElementById('newUserFuncs').classList.add('buttonBlock')
     $.ajax({ type: "post", url: `https://api.concredito.com.br/administrativo/criar`,
