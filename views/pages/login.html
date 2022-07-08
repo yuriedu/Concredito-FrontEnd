@@ -1,7 +1,7 @@
 <div style="position: relative; background-image: linear-gradient(to bottom right, #08436b, #52cbcf); width: 100vw; height: 100vh">
   <div class="width74 left10" style="position: absolute; left: 35vw; top: 25vh; padding-inline: 3vw; width: 24vw; height: 50vh; background: white; border-radius: 1vh; box-shadow: 0.4vh 0.4vh 1.5vh 1vh #00000080; text-align: center;">
     <div class="font-3" style="font-size: 5vh; font-weight: 600; margin-top: 4vh; border-bottom: 0.1vh solid rgba(180,180,180); padding-bottom: 2vh">
-      <img class="width35" src="/images/logo_blue.png" style="width: 15vw;">
+      <img class="width35" src="/public/images/logo_blue.png" style="width: 15vw;">
     </div>
     <div style="margin-inline: 2.5vh; margin-top: 6vh;">
       <div style="display: flex; flex-direction: row; border-bottom: 0.1vh solid black; align-items: center;">
@@ -25,16 +25,19 @@
     if (!user || !password) return alert('Coloque seu usuário e senha...')
     if (document.getElementById('login').classList.contains('buttonBlock')) return alert('Aguarde...')
     document.getElementById('login').classList.add("buttonBlock");
-    $.ajax({ type: "post", url: `http://localhost:3000/verifyLogin`, data: JSON.stringify({ user: user, password: password }), contentType:"application/json; charset=utf-8",
+    $.ajax({ type: "post", url: `http://localhost:3000/login`, data: JSON.stringify({ user: user, password: password }), contentType:"application/json; charset=utf-8",
       success: function(s) {
         document.getElementById('login').classList.remove("buttonBlock");
         if (s.error) return alert(s.error)
         localStorage.setItem('user', user)
         localStorage.setItem('password', password)
-        if (window.location.pathname.split('/')[1] == "login") return window.location = "/"
-        return $(document.body).load(`./pages/${window.location.pathname.split('/')[1] ? window.location.pathname.split('/')[1] : 'dashboard'}.html`, function(response, status, xhr) {
-          if (status == "error") return $(document.body).load(`./pages/dashboard.html`)
-        })
+        if (window.location.pathname.split('/')[1] == "login") {
+          return location.href = `/`
+        } else if (window.location.pathname.split('/')[1] && window.location.pathname.split('/')[2]) {
+          $(document.body).load(`/views/pages/${window.location.pathname.split('/')[1]}/${window.location.pathname.split('/')[2]}.html`, function(res, status, xhr) { if (status == "error") return $(document.body).load(`/views/pages/dashboard/destaque.html`) })
+        } else if (window.location.pathname.split('/')[1]) {
+          return $(document.body).load(`/pages/${window.location.pathname.split('/')[1]}.html`, function(res, status, xhr) { if (status == "error") return $(document.body).load(`/views/pages/dashboard/destaque.html`) })
+        } else return $(document.body).load(`/views/pages/dashboard/destaque.html`)
       },
       error: function(e) {
         document.getElementById('login').classList.remove("buttonBlock");

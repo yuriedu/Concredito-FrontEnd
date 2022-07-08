@@ -1,0 +1,253 @@
+<nav class="navbar-color" style="z-index: 97; position: fixed; top: 0; width: 100.2vw; height: 10vh;">
+  <div class="font-3" style="font-size: 3vh; font-weight: 600; display: flex; height: 100%; flex-direction: row;">
+    <div style="align-items: center; width: 100vw; justify-content: right; margin-right: 3vw; display: flex; flex-direction: row;">
+      <i id="themeButton" onclick="changeTheme()" style="margin-right: 3.5vh; cursor: pointer" class="far fa-lightbulb-on navbar-color-select"></i>
+      <i style="margin-right: 3.5vh; cursor: not-allowed" class="far fa-bell navbar-color-select"></i>
+      <div class="hoverMenuButton navbar-color-select" style="position: relative; cursor: pointer; height: 10vh; align-items: center; display: flex">
+        <a id="userNavbar">@??????</a>
+        <i style="padding-left: 0.4vw" class="fad fa-angle-down padding-left2"></i>
+        <div class="hoverMenu background-reverse width30 left80" style="position: absolute; left: -50%; top: 80%; padding-inline: 1vw; padding-bottom: 1vh; border-top-left-radius: 1vh; border-bottom-left-radius: 1vh; border-bottom-right-radius: 1vh; text-align: center; width: 6vw">
+          <a onclick="changePassword()" class="font-1 navbar-color-select" style="font-size: 1.7vh; font-weight: 600;">Alterar Senha</a><br/>
+          <a href="/logout" class="font-1 navbar-color-select" style="text-decoration: none; font-size: 1.7vh; color: red"><i class="fas fa-sign-out"></i> Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<nav id="sidebar" class="sidebar navbar-color" style="z-index: 98;">
+  <div class="height10 navbar-color-select" style="display: flex; flex-direction: row;">
+    <div onclick="sideBar()" class="width5 height10" style=" cursor: pointer; display: flex; font-size: 4vh; align-items: center; justify-content: center;">
+      <i id="iconSideBar" class="fas fa-bars" style="z-index: 2"></i>
+    </div>
+    <div class="visibleAndroid height10 font-5" style="z-index: 1; align-items: center; font-size: 3.5vh;">
+      <a href="/"><img id="logo2" class="zoom" src="/public/images/logo_white.png" style="height: 10vh; margin-top: 0.8vh; width: 40vw;"></a>
+    </div>
+  </div>   
+
+  <div>
+    <div id="administrativo-SideBar" onclick="subMenu('administrativo')" class="line-top height4vw navbar-background-select" style="display: flex; flex-direction: row; width: 100%; align-items: center; cursor: pointer">
+      <i class="fas fa-cog width5 font-size3" style="display: flex; justify-content: center; font-size: 4vh;"></i>
+      <a class="font-size2-5" style="padding-left: 0.2vw; font-size: 3vh;">Administrativo</a>
+      <i id="administrativo-Icon" class="fas fa-caret-left padding-right3" style="display: flex; width: 100%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+    </div>
+    <div id="administrativo-Sub" style="display: none;margin-inline: 2.6vw; margin-block: 0.5vh; flex-direction: column;">
+      <a id="administrativo-funcionarios" onclick="changeURL('administrativo','funcionarios')" class="navbar-color-select-block line-bottom font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Funcionários</a>
+      <a id="administrativo-relatorios" onclick="changeURL('administrativo','relatorios')" class="navbar-color-select-block font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Relatórios</a>
+    </div>
+
+    <div id="dashboard-SideBar" onclick="subMenu('dashboard')" class="line-top height4vw navbar-background-select" style="display: flex; flex-direction: row; width: 100%; align-items: center; cursor: pointer">
+      <i class="fas fa-chart-line width5 font-size3" style="display: flex; justify-content: center; font-size: 4vh;"></i>
+      <a class="font-size2-5" style="padding-left: 0.2vw; font-size: 3vh;">Dashboard</a>
+      <i id="dashboard-Icon" class="fas fa-caret-left padding-right3" style="display: flex; width: 100%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+    </div>
+    <div id="dashboard-Sub" style="display: none;margin-inline: 2.6vw; margin-block: 0.5vh; flex-direction: column;">
+      <a id="dashboard-destaque" onclick="changeURL('dashboard','destaque')" class="line-bottom font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Destaques</a>
+      <a id="dashboard-graficos" onclick="changeURL('dashboard','graficos')" class="navbar-color-select-block font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Relatórios</a>
+    </div>
+
+    <div id="propostas-SideBar" onclick="subMenu('propostas')" class="line-top height4vw navbar-background-select" style="display: flex; flex-direction: row; width: 100%; align-items: center; cursor: pointer">
+      <i class="far fa-money-check-edit width5 font-size3" style="display: flex; justify-content: center; font-size: 4vh;"></i>
+      <a class="font-size2-5" style="padding-left: 0.2vw; font-size: 3vh;">Propostas</a>
+      <i id="propostas-Icon" class="fas fa-caret-left padding-right3" style="display: flex; width: 100%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+    </div>
+    <div id="propostas-Sub" style="display: none;margin-inline: 2.6vw; margin-block: 0.5vh; flex-direction: column;">
+      <a id="propostas-cadastrar" onclick="changeURL('propostas','cadastrar')" class="navbar-color-select-block line-bottom font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Nova Proposta</a>
+      <a id="propostas-lista" onclick="changeURL('propostas','lista')" class="navbar-color-select-block font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Lista de Propostas</a>
+    </div>
+
+    <div id="consultas-SideBar" onclick="subMenu('consultas')" class="line-top height4vw navbar-background-select" style="display: flex; flex-direction: row; width: 100%; align-items: center; cursor: pointer">
+      <i class="far fa-file-search width5 font-size3" style="display: flex; justify-content: center; font-size: 4vh;"></i>
+      <a class="font-size2-5" style="padding-left: 0.2vw; font-size: 3vh;">Consultas</a>
+      <i id="consultas-Icon" class="fas fa-caret-left padding-right3" style="display: flex; width: 100%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+    </div>
+    <div id="consultas-Sub" style="display: none;margin-inline: 2.6vw; margin-block: 0.5vh; flex-direction: column;">
+      <a id="consultas-fgts" onclick="changeURL('consultas','fgts')" class="navbar-color-select-block line-bottom font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> FGTS</a>
+      <a id="consultas-lotes" onclick="changeURL('consultas','lotes')" class="navbar-color-select-block font-color-reverse navbar-color-select font-size2" style="cursor: pointer; font-size: 2.5vh; padding-block: 0.5vh; text-decoration: none;"><i style="padding-right: 0.2vw" class="fas fa-angle-right"></i> Lotes FGTS</a>
+    </div>
+
+    <div id="ajuda-SideBar" onclick="changeURL('ajuda','SideBar')" class="navbar-color-select-block line-top line-bottom height4vw navbar-background-select" style="display: flex; flex-direction: row; width: 100%; align-items: center; cursor: pointer">
+      <i class="far fa-question-circle width5 font-size3" style="display: flex; justify-content: center; font-size: 4vh;"></i>
+      <a class="font-size2-5" style="padding-left: 0.2vw; font-size: 3vh;">Ajuda</a>
+    </div>
+  </div>
+
+</nav>
+<div class="invisibleAndroid" style="z-index: 99; position: fixed; top: 0%; left: 6vw; height: 11vh; display: flex; align-items: center;">
+  <a href="/"><img id="logo" class="zoom" src="/public/images/logo_white.png" style="z-index: 2; height: 11vh; width: 10vw;"></a>
+</div>
+<div id="changePassword" class="background-reverse" style="z-index: 98; display: none; position: fixed; top: 30%; left: 30%; width: 40%; padding-inline: 2%; padding-block: 1%; border-radius: 2vh; box-shadow: 1vh 0.3vh 2vh 0vh rgba(0, 0, 0, 0.5), 0 2vh 2vh 0 rgba(0, 0, 0, 0.5); text-align: center">
+  <div style="display: flex; flex-direction: row">
+    <a class="font-size2" style="font-size: 3vh; width: 100%">Alterar Senha:</a>
+    <i onclick="changePassword()" class="far fa-times padding-right3" style="cursor: pointer; display: flex; width: 150%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+  </div>
+  <div style="width: 100%; display: flex; flex-direction: column;justify-content: center;">
+    <fieldset id="fieldset" class="font-size2" title="Coloque sua senha atual..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+      <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Senha Atual</legend>
+      <input id="oldPass" class="font-1 font-color-reverse" type="password" placeholder="Coloque sua senha aqui" style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+    </fieldset>
+    <fieldset id="fieldset" class="font-size2" title="Coloque sua nova senha..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+      <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Nova Senha</legend>
+      <input id="newPass" class="font-1 font-color-reverse" type="password" placeholder="Coloque sua nova senha aqui" style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+    </fieldset>
+    <fieldset id="fieldset" class="font-size2" title="Repita sua nova senha..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+      <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Repita a Senha</legend>
+      <input id="repeatPass" class="font-1 font-color-reverse" type="password" placeholder="Repita sua nova senha aqui" style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+    </fieldset>
+    <a onclick="savePassword()" id="savePassword" class="buttonLogin font-1 font-size1-5" style="border-radius: 1vh; width:40%; margin-inline: 30%; padding-block: 1vh; margin-top: 1vh; margin-block: 1vh">Salvar</a>
+  </div>
+</div>
+
+<script>
+  var sidebar = false
+  function sideBar() {
+    if (sidebar) {
+      sidebar = false
+      menus.forEach((element)=>{ if (element.active) return subMenu(element.name) })
+      document.getElementById("sidebar").style.maxWidth = window.screen.width < 900 ? '17vw' : '4.5vw'
+      document.getElementById("sidebar").style.width = window.screen.width < 900 ? '17vw' : '4.5vw'
+      document.getElementById("iconSideBar").classList.remove('fa-times')
+      document.getElementById("iconSideBar").classList.add('fa-bars');
+    } else {
+      sidebar = true
+      document.getElementById("sidebar").style.maxWidth = window.screen.width < 900 ? '65vw' : '20vw'
+      document.getElementById("sidebar").style.width = window.screen.width < 900 ? '65vw' : '20vw'
+      document.getElementById("iconSideBar").classList.remove('fa-bars')
+      document.getElementById("iconSideBar").classList.add('fa-times');
+    }
+  }
+  var menus = [
+    { name: "administrativo", active: false, pages: [ "funcionarios", "relatorios" ] },
+    { name: "dashboard", active: false, pages: [ "destaque", "relatorios" ] },
+    { name: "propostas", active: false, pages: [ "cadastrar", "lista" ] },
+    { name: "consultas", active: false, pages: [ "fgts", "lotes" ] },
+  ]
+  function subMenu(menu) {
+    if (menus.find(r=>r.name == menu)) {
+      if (menus.find(r=>r.name == menu).active) {
+        menus.find(r=>r.name == menu).active = false
+        document.getElementById(`${menu}-SideBar`).classList.remove('subbar-select');
+        document.getElementById(`${menu}-Sub`).style.display = 'none'
+        document.getElementById(`${menu}-Icon`).classList.remove('fa-caret-down')
+        document.getElementById(`${menu}-Icon`).classList.add('fa-caret-left')
+      } else {
+        if (!sidebar) sideBar()
+        menus.find(r=>r.name == menu).active = true
+        document.getElementById(`${menu}-SideBar`).classList.add('subbar-select');
+        document.getElementById(`${menu}-Sub`).style.display = 'flex'
+        document.getElementById(`${menu}-Icon`).classList.remove('fa-caret-left')
+        document.getElementById(`${menu}-Icon`).classList.add('fa-caret-down')
+      }
+    } else return location.href = menu
+  }
+  function changeURL(menu,submenu) {
+    if (submenu) {
+      if (document.getElementById(`${menu}-${submenu}`) && document.getElementById(`${menu}-${submenu}`).classList.contains('navbar-color-select-block')) {
+        return alert('Você não possui permissão para acessar esse sistema...')
+      } else return location.href =`/${menu}/${submenu}`
+    } else return location.href = `/${menu}`
+  }(function () {
+    document.getElementById(`userNavbar`).innerHTML = `<span style="margin-right: 0.1vw">@</span>${localStorage.getItem('user')}`
+    if (menus.find(r=>r.name==window.location.pathname.split('/')[1]) && menus.find(r=>r.pages.find(r2=>r2==window.location.pathname.split('/')[2]))) {
+      document.getElementById(`${window.location.pathname.split('/')[1]}-SideBar`).classList.add('navbar-select');
+      document.getElementById(`${window.location.pathname.split('/')[1]}-${window.location.pathname.split('/')[2]}`).classList.add('navbar-sub-select');
+    } else if (document.getElementById(`${window.location.pathname.split('/')[1]}-SideBar`)) {
+      document.getElementById(`${window.location.pathname.split('/')[1]}-SideBar`).classList.add('navbar-select');
+    } else {
+      document.getElementById(`dashboard-SideBar`).classList.add('navbar-select');
+      document.getElementById(`dashboard-destaque`).classList.add('navbar-sub-select');
+    }
+    $.ajax({ type: "post",url: `http://localhost:3000/permissions`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        Object.keys(s.permissions).forEach((key)=>{
+          if (menus.find(r=>r.name == key) && menus.find(r=>r.name == key).pages) {
+            menus.find(r=>r.name == key).pages.forEach((page)=>{
+              if (s.permissions[key][page] && document.getElementById(`${key}-${page}`)) {
+                document.getElementById(`${key}-${page}`).classList.remove('navbar-color-select-block');
+              }
+            })
+          }
+        })
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      }
+    })
+  })();
+</script>
+<script>
+  var changePass = false
+  function changePassword() {
+    if (changePass) {
+      changePass = false
+      document.getElementById('changePassword').style.display = 'none'
+    } else {
+      changePass = true
+      document.getElementById('changePassword').style.display = 'inline'
+    }
+  }
+  function savePassword() {
+    if (document.getElementById('savePassword').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById('oldPass').value) return alert('Você não colocou sua senha atual...')
+    if (!document.getElementById('newPass').value) return alert('Você não colocou sua nova senha...')
+    if (document.getElementById('newPass').value == document.getElementById('oldPass').value) return alert('Você colocou a nova senha igual sua atual...')
+    if (document.getElementById('newPass').value !== document.getElementById('repeatPass').value) return alert('Você repetiu a senha errado...')
+    document.getElementById('savePassword').classList.add("buttonBlock");
+    $.ajax({ type: "post",url: `http://localhost:3000/administrativo/edit`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: document.getElementById('oldPass').value,
+        newPassword: document.getElementById('newPass').value
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('savePassword').classList.remove("buttonBlock");
+        if (s.error) return alert(s.error)
+        return location.href = `/logout`
+      },
+      error: function(e) {
+        document.getElementById('savePassword').classList.remove("buttonBlock");
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      }
+    })
+  }
+</script>
+<script>
+    function changeTheme() {
+    if (localStorage.getItem('theme') === 'dark') {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.className = 'light'
+      document.getElementById("logo").src="/public/images/logo_white.png"
+      document.getElementById("logo2").src="/public/images/logo_white.png"
+      document.getElementById("themeButton").classList.remove('fa-lightbulb-slash')
+      document.getElementById("themeButton").classList.add('fa-lightbulb-on');
+    } else {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.className = 'dark'
+      document.getElementById("logo").src="/public/images/logo_black.png"
+      document.getElementById("logo2").src="/public/images/logo_black.png"
+      document.getElementById("themeButton").classList.remove('fa-lightbulb-on')
+      document.getElementById("themeButton").classList.add('fa-lightbulb-slash');
+    }
+  }(function () {
+    if (localStorage.getItem('theme') === 'dark') {
+      localStorage.setItem('theme', 'dark');
+      document.documentElement.className = 'dark'
+      document.getElementById("logo").src="/public/images/logo_black.png"
+      document.getElementById("logo2").src="/public/images/logo_black.png"
+      document.getElementById("themeButton").classList.remove('fa-lightbulb-on')
+      document.getElementById("themeButton").classList.add('fa-lightbulb-slash');
+    } else {
+      localStorage.setItem('theme', 'light');
+      document.documentElement.className = 'light'
+      document.getElementById("logo").src="/public/images/logo_white.png"
+      document.getElementById("logo2").src="/public/images/logo_white.png"
+      document.getElementById("themeButton").classList.remove('fa-lightbulb-slash')
+      document.getElementById("themeButton").classList.add('fa-lightbulb-on');
+    }
+  })();
+</script>

@@ -1,0 +1,383 @@
+<navbar id="navbar"></navbar>
+<script>$("#navbar").load(`/views/imports/navbar.html`)</script>
+
+<div class="bodyConsultas left17" style="position: relative; top: 10vh; left: 4.5vw;">
+  <div style="max-height: 90vh; overflow: auto; margin-inline: 4.5vw">
+    <a class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 3.5vh; margin-top: 4vh">Lista de Funcionários:</a>
+    <div style="width: 100%; display: flex; justify-content: center;">
+      <div class="borderColor width80p" style="width: 40%; height: 5vh; border-radius: 3vh">
+        <input onkeyup="SearchBARFuncionarios()" id="searchFuncionarios" placeholder="Pesquise pelo Nome ou ID do funcionário..." class="width70p font-size1-5" style="width: 88%; height: 100%; border: 0; background: transparent; font-size: 2.5vh; padding-inline: 2vh">
+        <i class="fas fa-search font-color-navbar" style="font-size: 2.8vh; cursor: pointer"></i>
+      </div>
+    </div>
+    <div id="listaFuncionarios" class="width80p margin-inline10p" style="width: 50%; margin-inline: 25%; margin-top: 3vh">
+    </div>
+    <div id="openFuncionario" class="background-reverse width80p left10p top-3" style="display: none; position: absolute; left: 25%; top: 5vh; width: 50vw; border-radius: 3vh">
+      <div style="margin-block: 3vh; padding-block: 2vh; max-height: 60vh; overflow: auto">
+        <input id="funcUser" style="display: none">
+        <div style="padding-inline: 5%">
+          <div style="width: 100%; display: flex;">
+            <a class="font-size2" style="font-size: 3.3vh; width: 100%; display: flex; justify-content: center">Funcionário: <span id="funcName" class="font-color-navbar" style="margin-left: 1vw">???</span></a>
+            <i onclick="openFuncionario()" class="fas fa-times" style="font-size: 3vh; cursor: pointer"></i>
+          </div>
+          <div id="permissoes">
+            <a class="font-size1-5" style="font-size: 2.3vh">Permissoes:</a>
+            <div class="flex-direction-column" style="display: flex; flex-direction: row;">
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="funcionariosS" onclick="inputChecked('funcionarios', 'administrativo')" class="slider">
+                  <div id="funcionariosB" class="sliderB"></div>
+                  <input name='funcionarios' id="funcionarios" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Editar Funcionários</a>
+              </div>
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="relatoriosS" onclick="inputChecked('relatorios', 'administrativo')" class="slider">
+                  <div id="relatoriosB" class="sliderB"></div>
+                  <input name='relatorios' id="relatorios" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Relatórios ADM</a>
+              </div>
+            </div>
+            <div class="flex-direction-column" style="display: flex; flex-direction: row; margin-top: 1vh">
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="cadastrarS" onclick="inputChecked('cadastrar', 'propostas')" class="slider">
+                  <div id="cadastrarB" class="sliderB"></div>
+                  <input name='cadastrar' id="cadastrar" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Criar Propostas</a>
+              </div>
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="listaS" onclick="inputChecked('lista', 'propostas')" class="slider">
+                  <div id="listaB" class="sliderB"></div>
+                  <input name='lista' id="lista" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Cadastrar Propostas</a>
+              </div>
+            </div>
+            <div class="flex-direction-column" style="display: flex; flex-direction: row; margin-top: 1vh">
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="fgtsS" onclick="inputChecked('fgts', 'consultas')" class="slider">
+                  <div id="fgtsB" class="sliderB"></div>
+                  <input name='fgts' id="fgts" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Consultar FGTS</a>
+              </div>
+              <div style="display: flex; margin-top: 1vh; width: 50%">
+                <div id="lotesS" onclick="inputChecked('lotes', 'consultas')" class="slider">
+                  <div id="lotesB" class="sliderB"></div>
+                  <input name='lotes' id="lotes" value='false' type='hidden'>
+                </div>
+                <a class="font-1 font-size1-5" style="margin-left: 1.3vh; margin-top: 0.65vh; font-size: 2.3vh">Consultar Lotes</a>
+              </div>
+            </div>
+            <fieldset id="fieldset" class="font-size2" title="Coloque sua senha atual..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 80%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; margin-inline: 10%; margin-top: 2vh">
+              <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Alterar senha</legend>
+              <input id="funcNewPass" class="font-1 font-color-reverse" type="password" placeholder="Coloque uma nova senha aqui" style="width: 80%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <div style="width: 100%; display: flex; justify-content: center; margin-top: 1vh">
+              <a onclick="salvarFuncs()" id="salvarFuncs" class="buttonLogin" style="font-size: 2.5vh; padding-inline: 2vw; padding-block: 1vh; border-radius: 1vh">Salvar</a>
+              <a onclick="deletarFuncs()" id="deletarFuncs" class="buttonLogin" style="margin-left: 2vw; font-size: 2.5vh; padding-inline: 2vw; padding-block: 1vh; border-radius: 1vh">Deletar</a>
+            </div>
+          </div>
+          <div id="consultasFGTS">
+            <div style="width: 100%; display: flex; margin-top: 3vh">
+              <a class="font-size1-5" style="font-size: 2.3vh; width: 70%">Consultas FGTS:</a>
+              <div style="width: 30%; display: flex; justify-content: right;">
+                <a onclick="limparFGTS()" class="font-size1-5 font-color-navbar" style="font-size: 2vh; cursor: pointer; text-decoration: underline;">Limpar</a>
+              </div>
+            </div>
+            <div class="borderColor-reverse" style="margin-top: 2vh; width: 80%; height: 4vh; border-radius: 3vh; margin-inline: 10%">
+              <input onkeyup="SearchBARFGTS()" id="searchFGTS" placeholder="Pesquise pelo CPF consultado..." class="width60p font-color-reverse font-size1-5" style="width: 86%; height: 100%; border: 0; background: transparent; font-size: 2.3vh; padding-inline: 2vh">
+              <i class="fas fa-search font-color-navbar" style="font-size: 2.6vh; cursor: pointer"></i>
+            </div>
+            <div id="listaFGTS">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <i onclick="openNewUser()" class="fas fa-user-plus navbar-color" style="cursor: pointer; position: fixed; z-index: 90; bottom: 5vh; right: 3vh; border-radius: 100%; padding-inline: 1vw; padding-block: 2.5vh"></i>
+    
+    <div id="newUser" class="background-reverse width80p left10p top10" style="display: none; position: absolute; left: 25%; top: 15vh; width: 50vw; border-radius: 3vh">
+      <div style="margin-block: 3vh; padding-block: 2vh; padding-inline: 10%; max-height: 60vh; overflow: auto">
+        <div style="width: 100%; display: flex;">
+          <a class="font-size2" style="font-size: 3.3vh; width: 100%; display: flex; justify-content: center">Novo Usuário</a>
+          <i onclick="openNewUser()" class="fas fa-times" style="font-size: 3vh; cursor: pointer"></i>
+        </div>
+        <fieldset id="fieldset" class="font-size2" title="Coloque sua senha atual..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+          <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Usuário</legend>
+          <input id="newUserUser" class="font-1 font-color-reverse" type="text" placeholder="Coloque o nome do usuário aqui..." style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+        </fieldset>
+        <fieldset id="fieldset" class="font-size2" title="Coloque a senha do usúario aqui..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+          <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Senha</legend>
+          <input id="newUserPass" class="font-1 font-color-reverse" type="password" placeholder="Coloque sua nova senha aqui" style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+        </fieldset>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 1vh">
+          <a onclick="createNewUser()" id="newUserFuncs" class="buttonLogin" style="font-size: 2.5vh; padding-inline: 2vw; padding-block: 1vh; border-radius: 1vh">Criar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var newUser = false
+  function openNewUser() {
+    if (newUser) {
+      newUser = false
+      document.getElementById('newUser').style.display = 'none'
+    } else {
+      newUser = true
+      document.getElementById('newUser').style.display = 'inline'
+    }
+  }
+  function createNewUser() {
+    if (document.getElementById('newUserFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
+    if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
+    document.getElementById('newUserFuncs').classList.add('buttonBlock')
+    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/criar`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        newUser: document.getElementById(`newUserUser`).value,
+        newPass: document.getElementById(`newUserPass`).value,
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('newUserFuncs').classList.remove('buttonBlock')
+        if (s.error) return alert(s.error)
+        return location.reload()
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      },
+    })
+  }
+  function deletarFuncs() {
+    if (document.getElementById('deletarFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
+    if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
+    document.getElementById('deletarFuncs').classList.add('buttonBlock')
+    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/deletar`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        funcionario: document.getElementById(`funcUser`).value
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('salvarFuncs').classList.remove('buttonBlock')
+        if (s.error) return alert(s.error)
+        return location.reload()
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      },
+    })
+  }
+  function salvarFuncs() {
+    if (document.getElementById('salvarFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById(`funcUser`).value) return alert('Funcionario não encontrado...')
+    if (!save && !document.getElementById(`funcNewPass`).value) return alert('Faça alguma alteração para salvar...')
+    document.getElementById('salvarFuncs').classList.add('buttonBlock')
+    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/edit`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        funcionario: document.getElementById(`funcUser`).value,
+        save: save,
+        newPassword: document.getElementById(`funcNewPass`).value
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('salvarFuncs').classList.remove('buttonBlock')
+        if (s.error) return alert(s.error)
+        return location.reload()
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      },
+    })
+  }
+  function limparFGTS() {
+    if (document.getElementById('deletarFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
+    document.getElementById('deletarFuncs').classList.add('buttonBlock')
+    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/limpar`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        funcionario: document.getElementById(`funcUser`).value,
+        meta: 'consultFgts'
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('deletarFuncs').classList.remove('buttonBlock')
+        if (s.error) return alert(s.error)
+        return location.reload()
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      },
+    })
+  }
+  var openFunc = false
+  function openFuncionario(i) {
+    if (i && (!users[i] || !users[i].permissions || !users[i].permissions.administrativo)) return;
+    if (openFunc) {
+      save = {
+        administrativo: { funcionarios: false, relatorios: false },
+        propostas: { cadastrar: false, lista: false },
+        consultas: { fgts: false, lotes: false },
+      }
+      document.getElementById('funcUser').value = ''
+      document.getElementById('funcNewPass').value = ''
+      document.getElementById("funcionariosB").classList.remove('sliderBC')
+      document.getElementById("funcionariosS").classList.remove('sliderC')
+      document.getElementById("relatoriosB").classList.remove('sliderBC')
+      document.getElementById("relatoriosS").classList.remove('sliderC')
+      document.getElementById("cadastrarB").classList.remove('sliderBC')
+      document.getElementById("cadastrarS").classList.remove('sliderC')
+      document.getElementById("listaB").classList.remove('sliderBC')
+      document.getElementById("listaS").classList.remove('sliderC')
+      document.getElementById("fgtsB").classList.remove('sliderBC')
+      document.getElementById("fgtsS").classList.remove('sliderC')
+      document.getElementById("lotesB").classList.remove('sliderBC')
+      document.getElementById("lotesS").classList.remove('sliderC')
+      document.getElementById("listaFGTS").innerHTML = ``
+      openFunc = false
+      document.getElementById(`funcName`).innerHTML = '???'
+      document.getElementById('openFuncionario').style.display = 'none'
+    } else {
+      save = {
+        administrativo: { funcionarios: false, relatorios: false },
+        propostas: { cadastrar: false, lista: false },
+        consultas: { fgts: false, lotes: false },
+      }
+      document.getElementById('funcNewPass').value = ''
+      document.getElementById('funcUser').value = users[i]._id
+      document.getElementById(`funcName`).innerHTML = users[i]._id
+      if (users[i].permissions.administrativo.funcionarios) {
+        save.administrativo.funcionarios = 'true'
+        document.getElementById('funcionarios').value = 'true'
+        document.getElementById("funcionariosB").classList.add('sliderBC')
+        document.getElementById("funcionariosS").classList.add('sliderC')
+      }
+      if (users[i].permissions.administrativo.relatorios) {
+        save.administrativo.relatorios = 'true'
+        document.getElementById('relatorios').value = 'true'
+        document.getElementById("relatoriosB").classList.add('sliderBC')
+        document.getElementById("relatoriosS").classList.add('sliderC')
+      }
+      if (users[i].permissions.propostas.cadastrar) {
+        save.propostas.cadastrar = 'true'
+        document.getElementById('cadastrar').value = 'true'
+        document.getElementById("cadastrarB").classList.add('sliderBC')
+        document.getElementById("cadastrarS").classList.add('sliderC')
+      }
+      if (users[i].permissions.propostas.lista) {
+        save.propostas.lista = 'true'
+        document.getElementById('lista').value = 'true'
+        document.getElementById("listaB").classList.add('sliderBC')
+        document.getElementById("listaS").classList.add('sliderC')
+      }
+      if (users[i].permissions.consultas.fgts) {
+        save.consultas.fgts = 'true'
+        document.getElementById('fgts').value = 'true'
+        document.getElementById("fgtsB").classList.add('sliderBC')
+        document.getElementById("fgtsS").classList.add('sliderC')
+      }
+      if (users[i].permissions.consultas.lotes) {
+        save.consultas.lotes = 'true'
+        document.getElementById('lotes').value = 'true'
+        document.getElementById("lotesB").classList.add('sliderBC')
+        document.getElementById("lotesS").classList.add('sliderC')
+      }
+      document.getElementById("listaFGTS").innerHTML = ``
+      users[i].counts.consultFgts.forEach((fgts, index)=>{
+        document.getElementById("listaFGTS").innerHTML += `<fgts class="background-Propostas-reverse" style="display: flex; flex-direction: column; width: 100%; padding-bottom: 1vh; margin-top: 2vh; border-radius: 1vh"><fieldset id="fieldset" class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 95%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh; display: none">${fgts._id}</legend><input class="font-1 font-color-reverse" value="${fgts._id}" style="width: 95%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></fieldset><div id="funcBanks${index}" style="width: 100%; display: flex; flex-direction: column;"></div></fgts>`
+        fgts.banks.forEach((bank)=>{
+          document.getElementById(`funcBanks${index}`).innerHTML += `<div style="display: flex;"><fieldset id="fieldset" class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend><input class="font-1 font-color-reverse" value="${bank._id}" style="width: 100%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></fieldset><fieldset id="fieldset" class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Total</legend><input class="font-1 font-color-reverse" value="${bank.saldoTotal}" style="width: 100%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></fieldset><fieldset id="fieldset" class="font-size2" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Liberado</legend><input class="font-1 font-color-reverse" value="${bank.saldoLiberado}" style="width: 100%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></fieldset><fieldset id="fieldset" class="font-size2 invisibleAndroid" style="font-size: 2.4vh; border-radius: 0.6vh; width: 20%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Data</legend><input class="font-1 font-color-reverse" value="${bank.data}" style="width: 100%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></fieldset></div>`
+        })
+      })
+      openFunc = true
+      document.getElementById('openFuncionario').style.display = 'inline'
+    }
+  }
+  var save = {
+    administrativo: { funcionarios: false, relatorios: false },
+    propostas: { cadastrar: false, lista: false },
+    consultas: { fgts: false, lotes: false },
+  }
+  function inputChecked(button, menu) {
+    if (document.getElementById(button).value == 'true') {
+      document.getElementById(button).value = 'false'
+      document.getElementById(button+"B").classList.remove('sliderBC')
+      document.getElementById(button+"S").classList.remove('sliderC')
+      save[menu][button] = 'false'
+    } else {
+      document.getElementById(button).value = 'true'
+      document.getElementById(button+"B").classList.add('sliderBC')
+      document.getElementById(button+"S").classList.add('sliderC')
+      save[menu][button] = 'true'
+    }
+  }
+  function SearchBARFuncionarios() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('searchFuncionarios');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("listaFuncionarios");
+    li = ul.getElementsByTagName('user');
+    for (i = 0; i < li.length; i++) {
+      a = li[i]
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "flex";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+  function SearchBARFGTS() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('searchFGTS');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("listaFGTS");
+    li = ul.getElementsByTagName('fgts');
+    for (i = 0; i < li.length; i++) {
+      a = li[i]
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "flex";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+</script>
+<script>
+  var users = []
+  function getFuncionarios() {
+    $.ajax({ type: "post", url: `http://localhost:3000/administrativo/funcionarios`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password')
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        if (s.error) return alert(s.error)
+        document.getElementById('listaFuncionarios').innerHTML = ``
+        users = s.users
+        users.forEach(async (user,index)=>{
+          document.getElementById('listaFuncionarios').innerHTML += `<user class="line-bottom" style="padding-inline: 5%; padding-block: 0.8vh; display: flex"><a class="font-size2" style="font-size: 2.6vh">${user._id}<span style="color: gray">#${index}</span></a><div style="width: 100%; display: flex; justify-content: right; align-items: center;"><a class="font-color-navbar font-size1-5" style="font-size: 2.2vh; cursor: pointer; font-weight: 800; text-decoration: underline" onclick="openFuncionario('${index}')">Visualizar/Editar</a></div></user>`
+        })
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Mande print do erro para o Yuri:\n ${JSON.stringify(e)}`)
+      },
+    })
+  }(function () {
+    getFuncionarios()
+  })();
+</script>

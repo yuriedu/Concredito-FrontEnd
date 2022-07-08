@@ -1,5 +1,5 @@
 <navbar id="navbar"></navbar>
-<script>$("#navbar").load(`./pages/imports/navbar.html`, function(response, status, xhr) { })</script>
+<script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
 <div class="body">
   <div class="margin-top2" style="margin-top: 12vh; margin-inline: 2vw;">
     <div class="font-2 font-size2" style="font-size: 4vh; font-weight: 600; display: flex; flex-direction: row;">
@@ -7,11 +7,13 @@
         <a>Propostas no Robo:</a>
       </div>
       <div class="width40" style="width: 20%; display: flex; flex-direction: row; justify-content: right; align-items: center;">
+        <a onclick="openTokens()" class="invisibleAndroid font-color-navbar font-1" style="text-decoration: underline; font-weight: 800; font-size: 2vh; margin-right: 1vw; cursor: pointer">Tokens</a>
         <i id="refresh" onclick="refresh()" title="Atualizar Propostas" class="fad fa-sync font-size2" style="font-size: 3vh; margin-right: 1.2vw; cursor: pointer"></i>
         <a id="cadastrar" onclick="cadastrar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw">Cadastrar</a>
         <input id="selectAll" class="width3 height3vw" onclick="toggleAllCheckBox(this)" title="Selecionar Todos" type="checkbox" style="width: 2.5vh; height: 2.5vh;">
       </div>
     </div>
+    <a onclick="openTokens()" class="visibleAndroid font-color-navbar font-1" style="text-decoration: underline; font-weight: 800; font-size: 1.5vh; margin-right: 1vw; cursor: pointer">Tokens</a>
     <div id="propostas" style="margin-top: 2vh; margin-bottom: 2vh;">
       <!-- <div id="proposta${index}">
         <div class="background-Propostas width79" style="position: relative; margin-bottom: 2vh; width: 91.5vw; height: 16vh; border-radius: 1vh; font-size: 2.2vh;">
@@ -86,8 +88,31 @@
     </div>
   </div>
 </div>
+<div id="tokens" class="background-reverse" style="display: none; position: fixed; top: 30%; left: 20%; width: 60%; padding-inline: 2%; padding-block: 1%; border-radius: 2vh; box-shadow: 1vh 0.3vh 2vh 0vh rgba(0, 0, 0, 0.5), 0 2vh 2vh 0 rgba(0, 0, 0, 0.5);">
+  <div style="display: flex; flex-direction: row">
+    <a style="font-size: 3vh">Tokens:</a>
+    <i onclick="openTokens()" class="far fa-times padding-right3" style="cursor: pointer; display: flex; width: 100%; justify-content: right; font-size: 3.5vh; padding-right: 1.5vw"></i>
+  </div>
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <fieldset id="fieldset" class="font-size2" title="Coloque o Token..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 100%; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+      <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">BMG</legend>
+      <input id="tokenBMG" class="font-1 font-color-reverse" placeholder="000000" style="width: 100%; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+    </fieldset>
+  </div>
+</div>
 <script>
-  $("#navbar").load(`./pages/imports/navbar.html`, function(response, status, xhr) { })
+  var tokens = false
+  function openTokens() {
+    if (tokens) {
+      tokens = false
+      document.getElementById('tokens').style.display = 'none'
+    } else {
+      tokens = true
+      document.getElementById('tokens').style.display = 'inline'
+    }
+  }
+</script>
+<script>
   var checkeds = []
   function toggleAllCheckBox(source) {
     checkboxes = document.getElementsByName('box');
@@ -130,7 +155,7 @@
     document.getElementById('cadastrar').classList.add("buttonBlock");
     document.getElementById('propostas').innerHTML = `<div style="position: absolute; top: 20vh; left: 50%; margin-top: 0vh; margin-left: -2vh"><div class="loader-wheel"></div><div class="loader-text font-5"></div></div>`
     document.getElementById('selectAll').checked = false
-    $.ajax({ type: "post",url: `http://localhost:3000/refresh`,
+    $.ajax({ type: "post",url: `http://localhost:3000/propostas/lista`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password') 
@@ -185,11 +210,12 @@
       document.getElementById(`situacao${element.index}`).value = `Iniciando Cadastro...`
       document.getElementById(`situacaoTitle${element.index}`).title = `Iniciando Cadastro...`
       setTimeout(function(){ checkSituation(element, element.index, "Aguardando Cadastro...", true) }, 500)
-      $.ajax({ type: "post",url: `http://localhost:3000/cadastrar`,
+      $.ajax({ type: "post",url: `http://localhost:3000/propostas/register`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
-        proposta: element
+        proposta: element,
+        tokenBMG: document.getElementById(`tokenBMG`) && document.getElementById(`tokenBMG`).value ? document.getElementById(`tokenBMG`).value : false,
       }), contentType:"application/json; charset=utf-8",
         success: async function(s) {
           if (s.status) {
@@ -216,7 +242,7 @@
     })
   }
   function checkSituation(element, index, situation, action) {
-    $.ajax({ type: "post", url: `http://localhost:3000/verifySituation`,
+    $.ajax({ type: "post", url: `http://localhost:3000/propostas/situation`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),

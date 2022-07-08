@@ -1,8 +1,8 @@
 <navbar id="navbar"></navbar>
-<script>$("#navbar").load(`./pages/imports/navbar.html`, function(response, status, xhr) { })</script>
+<script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
 <div class="bodyConsultas left17" style="position: relative; top: 10vh; left: 4.5vw">
-  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2" style="position: absolute; left: 22.75vw; top: 19vh; width: 50vw; border-radius: 3vh;">
-    <div style="max-height: 70vh; overflow-y: auto; margin-block: 2vh;">
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top10" style="position: absolute; left: 22.75vw; top: 19vh; width: 50vw; border-radius: 3vh;">
+    <div class="max-height50" style="max-height: 70vh; overflow-y: auto; margin-block: 2vh;">
       <div id="novaConsulta">
         <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
           <a>Consultas de FGTS:</a>
@@ -83,6 +83,14 @@
   </div>
 </div>
 <script>
+  function toggle(source) {
+    checkboxes = document.getElementsByName('checks');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+      checkboxes[i].checked = source.checked;
+    }
+  }
+</script>
+<script>
   var banks = [
     { name:'FACTA FINANCEIRA', options:'<fieldset class="font-size2" title="Selecione a Tabela..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 35vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Tabela</legend><select id="option1"  class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 35vw; background: transparent; border:none; border: 0; font-weight: 400;"><option value="GOLD" style="color: black; font-weight: 600;">Gold</option><option value="NORMAL" style="color: black; font-weight: 600;">Normal</option></select></fieldset>' },
     { name:'BANCO C6', options:'<fieldset class="font-size2" title="Selecione o Tipo..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Tipo</legend><select id="option1" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 20vw; background: transparent; border:none; border: 0; font-weight: 400;"><option value="POR_VALOR_TOTAL" style="color: black; font-weight: 600;">Valor Total</option><option value="POR_VALOR_SOLICITADO" style="color: black; font-weight: 600;">Valor Solicitado</option><option value="POR_QUANTIDADE_DE_PARCELAS" style="color: black; font-weight: 600;">Quantidade de Parcelas</option></select></fieldset><fieldset class="font-size2" title="Coloque o Valor..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 20vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; "><legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Valor</legend><input id="option2" class="font-1 font-color" type="number" placeholder="000.00" style="width: 20vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0"></fieldset>' },
@@ -106,7 +114,7 @@
     if (document.getElementById('cpf').value.length != 11) return alert('O CPF está invalido, verifique e tente novamente...')
     document.getElementById('consultar').classList.add("buttonBlock");
     setTimeout(function(){ verifyQueue(0) }, 500)
-    $.ajax({ type: "post",url: `http://localhost:3000/consultar`,
+    $.ajax({ type: "post",url: `http://localhost:3000/consultas/fgts`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
@@ -127,8 +135,12 @@
         document.getElementById('parcResult').value = s.parcelas.length
         document.getElementById('parcs').innerHTML = `<div class="line-bottom" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;"><input onclick="toggle(this)" type="checkbox" style="width: 10%; height: 2vh; margin: 0"><a style="width: 50%;">Data</a><a style="width: 40%;">Valor</a></div>`
         s.parcelas.forEach((element)=>{
-          document.getElementById('parcs').innerHTML += `<div class="line-top" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;"><input type="checkbox" style="width: 10%; height: 2vh; margin: 0"><a class="font-size2" style="width: 50%;">${element.data}</a><a class="font-size2" style="width: 40%;">${element.valor}</a></div>`
+          document.getElementById('parcs').innerHTML += `<div class="line-top" style="width: 100%; display: flex; justify-content: center; text-align: center; padding-block: 0.8vh; font-size: 2.5vh; align-items: center;"><input name="checks" type="checkbox" style="width: 10%; height: 2vh; margin: 0"><a class="font-size2" style="width: 50%;">${element.data}</a><a class="font-size2" style="width: 40%;">${element.valor}</a></div>`
         })
+        document.getElementById('novaConsulta').style.display = 'none'
+        document.getElementById('resultConsulta').style.display = 'inline'
+        document.getElementById('consultar').classList.remove("buttonBlock");
+        document.getElementById('changeTop').style.top = '8vh'
         if (screen.width <= 900) {
           document.getElementById('cpfResult').value = s.cpf
           document.getElementById('totalName').innerHTML = "Total"
@@ -136,10 +148,6 @@
           document.getElementById('dataName').innerHTML = "Data"
           document.getElementById('parcName').innerHTML = "Parcelas"
         }
-        document.getElementById('novaConsulta').style.display = 'none'
-        document.getElementById('resultConsulta').style.display = 'inline'
-        document.getElementById('changeTop').style.top = '8vh'
-        document.getElementById('consultar').classList.remove("buttonBlock");
       },
       error: function(e) {
         document.getElementById('consultar').classList.remove("buttonBlock");
@@ -149,11 +157,12 @@
     })
   }
   function verifyQueue(fila) {
-    $.ajax({ type: "post",url: `http://localhost:3000/verifyQueue`,
+    $.ajax({ type: "post",url: `http://localhost:3000/consultas/queue`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
         password: localStorage.getItem('password'),
         fila: fila,
+        bank: document.getElementById('banks') && document.getElementById('banks').value != 'false' ? document.getElementById('banks').value : false,
       }), contentType:"application/json; charset=utf-8",
       success: async function(s) {
         if (s.fila) {
@@ -173,6 +182,6 @@
     document.getElementById('resultConsulta').style.display = 'none'
   }
   (function () {
-    verifyQueue()
+    
   })();
 </script>
