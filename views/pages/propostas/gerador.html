@@ -1,0 +1,87 @@
+<navbar id="navbar"></navbar>
+<script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
+<div class="bodyConsultas left17 top10" style="position: relative; top: 0vh; left: 4.5vw">
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top10" style="position: relative; left: 25vw; top: 19vh; width: 50vw; border-radius: 3vh; padding-top: 1vh">
+    <div style="margin-block: 2vh;">
+      <div id="novaConsulta" style="padding-bottom: 2vh">
+        <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
+          <a>Gerador de Cadastros:</a>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Selecione o Banco..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Banco</legend>
+            <select id="banks" onchange="setBank(this.value)" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 40vw; background: transparent; border:none; border: 0; font-weight: 400;">
+              <option value="false" style="color: black;" selected>Não Selecionado</option>
+              <option value="BMG" style="color: black; font-weight: 600;" >BMG</option>
+            </select>
+          </fieldset>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Cod. AF</legend>
+            <input id="af" type="number" class="font-1 font-color" placeholder="000000" style="width: 30vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+          </fieldset>
+        </div>
+        <div style="display: flex; font-weight: 600; justify-content: center; margin-block: 2vh;">
+            <a id="gerar" onclick="gerar()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Gerar</a>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+          <fieldset class="font-size2" title="Codigo da primeira pagina" style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Codigo 1</legend>
+            <div style="display: flex">
+              <textarea rows="4" id="code1" class="font-size1-5 font-1 font-color" placeholder="Aqui será gerado um codigo para a primeira pagina de cadastro de propostas do banco" style="width: 30vw; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></textarea>
+              <i onclick="copy('code1')" style="font-size: 2.5vh; cursor: pointer" title="Copiar" class="fas fa-copy"></i>
+            </div>
+          </fieldset>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center; margin-block: 2vh;">
+          <fieldset class="font-size2" title="Codigo da segunda pagina" style="font-size: 2.4vh; border-radius: 0.6vh; width: 30vw; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+            <legend class="font-4" style="margin: 0; padding: 0; font-size: 2.3vh">Codigo 2</legend>
+            <div style="display: flex">
+              <textarea rows="4" id="code2" class="font-size1-5 font-1 font-color" placeholder="Aqui será gerado um codigo para a segunda pagina de cadastro de propostas do banco" style="width: 30vw; margin: 0; font-size: 2.3vh; background: transparent; border: 0" disabled></textarea>
+              <i onclick="copy('code2')" style="font-size: 2.5vh; cursor: pointer" title="Copiar" class="fas fa-copy"></i>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var code1 = false
+  var code2 = false
+  function copy(code) {
+    if (code == 'code1' && code1) return navigator.clipboard.writeText(code1);
+    if (code == 'code2' && code2) return navigator.clipboard.writeText(code2);
+    alert('Não tem nenhum codigo aqui para copiar...')
+  }
+  function gerar() {
+    if (document.getElementById('gerar').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById('af').value) return alert('Coloque o codigo da AF...')
+    if (!document.getElementById('banks').value || document.getElementById('banks').value == 'false') return alert('Coloque o banco que desejas gerar...')
+    document.getElementById('gerar').classList.add('buttonBlock')
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/propostas/generator`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        bank: document.getElementById('banks').value,
+        af: document.getElementById('af').value
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        if (s.error) return alert(s.error)
+        code1 = s.code1
+        code2 = s.code2
+        document.getElementById('code1').value = `${code1}`
+        document.getElementById('code2').value = `${code2}`
+        document.getElementById('gerar').classList.remove('buttonBlock')
+      },
+      error: function(e) {
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
+      }
+    })
+  }
+  (function () {
+    refresh()
+  })();
+</script>
