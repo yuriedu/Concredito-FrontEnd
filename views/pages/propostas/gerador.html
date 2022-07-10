@@ -68,14 +68,15 @@
         af: document.getElementById('af').value
       }), contentType:"application/json; charset=utf-8",
       success: async function(s) {
+        document.getElementById('gerar').classList.remove('buttonBlock')
         if (s.error) return alert(s.error)
         code1 = s.code1
         code2 = s.code2
         document.getElementById('code1').value = `${code1}`
         document.getElementById('code2').value = `${code2}`
-        document.getElementById('gerar').classList.remove('buttonBlock')
       },
       error: function(e) {
+        document.getElementById('gerar').classList.remove('buttonBlock')
         if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
         return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       }
