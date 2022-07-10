@@ -51,9 +51,13 @@
   var code1 = false
   var code2 = false
   function copy(code) {
-    if (code == 'code1' && code1) return navigator.clipboard.writeText(code1);
-    if (code == 'code2' && code2) return navigator.clipboard.writeText(code2);
-    alert('Não tem nenhum codigo aqui para copiar...')
+    if (code == 'code1' && code1) {
+      return navigator.clipboard.writeText(code1);
+      return alert('Codigo[1] copiado com sucesso!')
+    } else if (code == 'code2' && code2) {
+      navigator.clipboard.writeText(code2);
+      return alert('Codigo[2] copiado com sucesso!')
+    } else return alert('Não tem nenhum codigo aqui para copiar...')
   }
   function gerar() {
     if (document.getElementById('gerar').classList.contains('buttonBlock')) return alert('Aguarde...')
