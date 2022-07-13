@@ -48,7 +48,7 @@
             </fieldset>
             <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 13vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
               <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">CEP</legend>
-              <input id="Cep" type="email" class="font-1 font-color font-size1-5" placeholder="00000-000" style="width: 13vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+              <input id="Cep" type="email" class="font-1 font-color font-size1-5" placeholder="00000000" style="width: 13vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
             </fieldset>
           </div>
           <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
@@ -207,8 +207,7 @@
     if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
     if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
     var Datanascimento = document.getElementById('Datanascimento').value.split('-').reverse().join('-');
-    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 9) return alert('O CEP está invalido! Exemplo: 00000-000')
-    if (!Number(document.getElementById('Cep').value.slice(0,5)) || document.getElementById('Cep').value.slice(5,6) != "-" || !Number(document.getElementById('Cep').value.slice(6,9))) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 8) return alert('O CEP está invalido')
     if (!document.getElementById('Cidade').value || document.getElementById('Cidade').value.length < 3) return alert('A cidade está invalido...')
     if (!document.getElementById('Bairro').value || document.getElementById('Bairro').value.length < 3) return alert('O Bairro está invalido...')
     if (!document.getElementById('Endereco').value || document.getElementById('Endereco').value.length < 3) return alert('O Endereço está invalido...')
@@ -231,8 +230,7 @@
     if (document.getElementById('TelefoneConvenio').value.slice(0,1) != "(" || document.getElementById('TelefoneConvenio').value.slice(3,4) != ")" || document.getElementById('TelefoneConvenio').value.slice(4,5) != " " || document.getElementById('TelefoneConvenio').value.slice(5,6) != "9" || document.getElementById('TelefoneConvenio').value.slice(10,11) != "-") return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
     if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
     if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
-    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 9) return alert('O CEP está invalido! Exemplo: 00000-000')
-    if (!Number(document.getElementById('Cep').value.slice(0,5)) || document.getElementById('Cep').value.slice(5,6) != "-" || !Number(document.getElementById('Cep').value.slice(6,9))) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 8) return alert('O CEP está invalido!')
     if (!document.getElementById('Cidade').value || document.getElementById('Cidade').value.length < 3) return alert('A cidade está invalido...')
     if (!document.getElementById('Bairro').value || document.getElementById('Bairro').value.length < 3) return alert('O Bairro está invalido...')
     if (!document.getElementById('Endereco').value || document.getElementById('Endereco').value.length < 3) return alert('O Endereço está invalido...')
@@ -241,7 +239,7 @@
 
     if (!document.getElementById('NomeMae').value || document.getElementById('NomeMae').value.length <= 5 || !document.getElementById('NomeMae').value.includes(" ")) return alert('O Nome da Mãe está invalido...')
     if (!document.getElementById('CodBancoCliente').value || !Number(document.getElementById('CodBancoCliente').value)) return alert('O Banco do Cliente está invalido...')
-    if (document.getElementById('CodBancoCliente').value < 10000) return alert('O Banco do Cliente está invalido...')
+    if (document.getElementById('CodBancoCliente').value > 9999) return alert('O Banco do Cliente está invalido...')
     if (!document.getElementById('Agencia').value || document.getElementById('Agencia').value.length != 4) return alert('A agência está invalido...')
     if (!document.getElementById('ContaCorrente').value) return alert('A Conta está invalido...')
     if (!document.getElementById('Prazo').value || document.getElementById('Prazo').value < 1 || !document.getElementById('Prazo').value > 99) return alert('A quantidade de parcelas está invalido...')
