@@ -167,8 +167,6 @@
               <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Orgão</legend>
               <select id="Orgao" type="text" class="font-1 font-color font-size1-5" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
                 <option value="FGTS">FGTS</option>
-                <option value="INSS">INSS</option>
-                <option value="CART">CARTÃO</option>
               </select>
             </fieldset>
           </div>
@@ -202,8 +200,7 @@
     if (!document.getElementById('NomeCliente').value || document.getElementById('NomeCliente').value.length <= 5 || !document.getElementById('NomeCliente').value.includes(" ")) return alert('O nome do cliente está invalido...')
     if (!document.getElementById('Cpf').value || document.getElementById('Cpf').value.length != 11) return alert('O CPF está invalido...')
     if (!document.getElementById('rg').value || !Number(document.getElementById('rg').value) || document.getElementById('rg').value.length < 3) return alert('O RG está invalido...')
-    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 15) return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
-    if (document.getElementById('TelefoneConvenio').value.slice(0,1) != "(" || document.getElementById('TelefoneConvenio').value.slice(3,4) != ")" || document.getElementById('TelefoneConvenio').value.slice(4,5) != " " || document.getElementById('TelefoneConvenio').value.slice(5,6) != "9" || document.getElementById('TelefoneConvenio').value.slice(10,11) != "-") return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 11) return alert('O Telefone está invalido! Exemplo: 00900000000')
     if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
     if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
     var Datanascimento = document.getElementById('Datanascimento').value.split('-').reverse().join('-');
@@ -226,8 +223,7 @@
     if (!document.getElementById('NomeCliente').value || document.getElementById('NomeCliente').value.length <= 5 || !document.getElementById('NomeCliente').value.includes(" ")) return alert('O nome do cliente está invalido...')
     if (!document.getElementById('Cpf').value || document.getElementById('Cpf').value.length != 11) return alert('O CPF está invalido...')
     if (!document.getElementById('rg').value || !Number(document.getElementById('rg').value) || document.getElementById('rg').value.length < 3) return alert('O RG está invalido...')
-    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 15) return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
-    if (document.getElementById('TelefoneConvenio').value.slice(0,1) != "(" || document.getElementById('TelefoneConvenio').value.slice(3,4) != ")" || document.getElementById('TelefoneConvenio').value.slice(4,5) != " " || document.getElementById('TelefoneConvenio').value.slice(5,6) != "9" || document.getElementById('TelefoneConvenio').value.slice(10,11) != "-") return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 11) return alert('O Telefone está invalido! Exemplo: 00900000000')
     if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
     if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
     if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 8) return alert('O CEP está invalido!')
@@ -245,9 +241,6 @@
     if (!document.getElementById('Prazo').value || document.getElementById('Prazo').value < 1 || !document.getElementById('Prazo').value > 99) return alert('A quantidade de parcelas está invalido...')
     if (!document.getElementById('ValorParcela').value || document.getElementById('ValorParcela').value < 1) return alert('O valor da parcela está invalido...')
     if (!document.getElementById('Valor').value || document.getElementById('Valor').value < 1) return alert('O valor da AF está invalido...')
-    document.getElementById('cadastrar').classList.add('buttonBlock')
-    document.getElementById('operadores').classList.add('buttonBlock')
-
     var proposta = {
       NomeCliente: document.getElementById('NomeCliente').value,
       Cpf: document.getElementById('Cpf').value,
@@ -255,7 +248,7 @@
       TelefoneConvenio: document.getElementById('TelefoneConvenio').value.replaceAll("-", "").replaceAll(" ", "").replaceAll("(","").replaceAll(")",""),
       Email: document.getElementById('Email').value,
       Datanascimento: document.getElementById('Datanascimento').value,
-      sexo: document.getElementById('saxo').value,
+      sexo: document.getElementById('sexo').value,
       Cep: document.getElementById('Cep').value,
       Cidade: document.getElementById('Cidade').value,
       Bairro: document.getElementById('Bairro').value,
@@ -274,6 +267,8 @@
       Tabela: document.getElementById('Tabela').value,
       Valor: document.getElementById('Valor').value,
     }
+    document.getElementById('cadastrar').classList.add('buttonBlock')
+    document.getElementById('operadores').classList.add('buttonBlock')
     $.ajax({ type: "post",url: `https://api.concredito.com.br/propostas/create`,
       data: JSON.stringify({
         user: localStorage.getItem('user'),
