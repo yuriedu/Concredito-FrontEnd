@@ -1,0 +1,304 @@
+<navbar id="navbar"></navbar>
+<script>$("#navbar").load(`/views/imports/navbar.html`, function(response, status, xhr) { })</script>
+<div class="bodyConsultas left17 top10" style="position: relative; top: 0vh; left: 4.5vw">
+  <div id="changeTop" class="background-Propostas left16-5 width70 scroll2 top6" style="position: relative; left: 25vw; top: 16vh; width: 50vw; border-radius: 3vh; padding-top: 1vh">
+    <div style="margin-block: 2vh;">
+      <div id="novaConsulta" style="padding-bottom: 2vh">
+        <div class="font-size2" style="width: 100%; display: flex; justify-content: center; font-size: 4vh; margin-top: 3vh">    
+          <a>Nova Proposta:</a>
+        </div>
+        <div id="primeiraPagina">
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Nome do Cliente</legend>
+              <input id="NomeCliente" type="text" class="font-1 font-color font-size1-5" placeholder="Nome Completo" style="width: 40vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">CPF</legend>
+              <input id="Cpf" type="number" class="font-1 font-color font-size1-5" placeholder="00000000000" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">RG</legend>
+              <input id="rg" type="text" class="font-1 font-color font-size1-5" placeholder="000000000" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Telefone</legend>
+              <input id="TelefoneConvenio" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="(00) 90000-0000" class="font-1 font-color font-size1-5" placeholder="Nome Completo" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Email</legend>
+              <input id="Email" type="email" class="font-1 font-color font-size1-5" placeholder="seu-email@email.com" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 13vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Data de Nascimento</legend>
+              <input id="Datanascimento" type="date" data-date-format="DD MMMM YYYY" class="font-1 font-color font-size1-5" placeholder="00/00/0000" style="width: 13vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 11vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Sexo</legend>
+              <select id="sexo" class="font-1 font-color font-size1-5" style="width: 11vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+              </select>
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 13vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">CEP</legend>
+              <input id="Cep" type="email" class="font-1 font-color font-size1-5" placeholder="00000-000" style="width: 13vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Cidade</legend>
+              <input id="Cidade" type="text" class="font-1 font-color font-size1-5" placeholder="....." style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Bairro</legend>
+              <input id="Bairro" type="email" class="font-1 font-color font-size1-5" placeholder="....." style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 10vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Estado</legend>
+              <select id="UF" type="text" class="font-1 font-color font-size1-5" placeholder="....." style="width: 10vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 21vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Endereço</legend>
+              <input id="Endereco" type="text" class="font-1 font-color font-size1-5" placeholder="....." style="width: 21vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 5vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Número</legend>
+              <input id="EndNumero" type="text" class="font-1 font-color font-size1-5" placeholder="000" style="width: 5vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="display: flex; font-weight: 600; justify-content: center; margin-block: 2vh;">
+            <a id="proximo" onclick="proximo()" class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Proximo</a>
+          </div>
+        </div>
+
+
+
+
+        <div id="segundaPagina" style="display: none">
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 40vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Nome da Mãe</legend>
+              <input id="NomeMae" type="text" class="font-1 font-color font-size1-5" placeholder="Nome Completo" style="width: 40vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Banco do Cliente</legend>
+              <input id="CodBancoCliente" type="number" class="font-1 font-color font-size1-5" placeholder="0000" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Agência</legend>
+              <input id="Agencia" type="text" class="font-1 font-color font-size1-5" placeholder="0000" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Conta</legend>
+              <input id="ContaCorrente" type="text" class="font-1 font-color font-size1-5" placeholder="0000000" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Poupança</legend>
+              <select id="Poupanca" type="text" class="font-1 font-color font-size1-5" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+              </select>
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Quantide de Parcelas</legend>
+              <input id="Prazo" type="number" class="font-1 font-color font-size1-5" placeholder="00" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Valor da Parcela</legend>
+              <input id="ValorParcela" type="number" class="font-1 font-color font-size1-5" placeholder="000.00" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Banco Operação</legend>
+              <select id="BancoContrato" type="text" class="font-1 font-color font-size1-5" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="FACTA FINANCEIRA">FACTA FINANCEIRA</option>
+                <option value="BANCO C6">BANCO C6</option>
+                <option value="MERCANTIL">MERCANTIL</option>
+                <option value="BMG">BMG</option>
+                <option value="PANAMERICANO">PANAMERICANO</option>
+                <option value="SAFRA">SAFRA</option>
+              </select>
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Orgão</legend>
+              <select id="Orgao" type="text" class="font-1 font-color font-size1-5" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="FGTS">FGTS</option>
+                <option value="INSS">INSS</option>
+                <option value="CART">CARTÃO</option>
+              </select>
+            </fieldset>
+          </div>
+          <div style="width: 100%; display: flex; justify-content: center; margin-top: 2vh">
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Tabela</legend>
+              <select id="Tabela" type="text" class="font-1 font-color font-size1-5" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+                <option value="default">PADRÃO</option>
+                <option value="GOLD">FACTA - GOLD</option>
+                <option value="NORMAL">FACTA - NORMAL</option>
+              </select>
+            </fieldset>
+            <fieldset class="font-size2" title="Coloque o codigo da proposta..." style="font-size: 2.4vh; border-radius: 0.6vh; width: 19vw; height: 7vh; padding: 0; padding-inline: 0.4vw; margin: 0; margin-left: 0.5vw; ">
+              <legend class="font-4 font-size1-5" style="margin: 0; padding: 0; font-size: 2.3vh">Valor AF</legend>
+              <input id="Valor" type="number" class="font-1 font-color font-size1-5" placeholder="0000.00" style="width: 19vw; height: 3vh; margin: 0; font-size: 2.3vh; background: transparent; border: 0">
+
+            </fieldset>
+          </div>
+          <div style="display: flex; font-weight: 600; justify-content: center; margin-block: 2vh;">
+            <a id="cadastrar" onclick="cadastrar()" class="buttonBlock" title="Cadastre sua proposta agora e automaticamente..." class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Cadastrar</a>
+            <a id="operadores" onclick="cadastrar(true)" title="Envie a proposta para algum operador cadastrar manualmente..." class="buttonLogin font-2 font-size1-5" style="font-size: 3vh; padding-inline: 3vh; padding-block: 1vh; border-radius: 1vh; margin-right: 1vw;">Operador</a>
+          </div>
+          <a onclick="voltar()" class="font-color-navbar" style="font-size: 2vh; font-weight: 800; cursor: pointer; text-decoration: underline; width: 100%; display: flex; justify-content: center;">Voltar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function proximo() {
+    if (!document.getElementById('NomeCliente').value || document.getElementById('NomeCliente').value.length <= 5 || !document.getElementById('NomeCliente').value.includes(" ")) return alert('O nome do cliente está invalido...')
+    if (!document.getElementById('Cpf').value || document.getElementById('Cpf').value.length != 11) return alert('O CPF está invalido...')
+    if (!document.getElementById('rg').value || !Number(document.getElementById('rg').value) || document.getElementById('rg').value.length < 3) return alert('O RG está invalido...')
+    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 15) return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (document.getElementById('TelefoneConvenio').value.slice(0,1) != "(" || document.getElementById('TelefoneConvenio').value.slice(3,4) != ")" || document.getElementById('TelefoneConvenio').value.slice(4,5) != " " || document.getElementById('TelefoneConvenio').value.slice(5,6) != "9" || document.getElementById('TelefoneConvenio').value.slice(10,11) != "-") return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
+    if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
+    var Datanascimento = document.getElementById('Datanascimento').value.split('-').reverse().join('-');
+    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 9) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!Number(document.getElementById('Cep').value.slice(0,5)) || document.getElementById('Cep').value.slice(5,6) != "-" || !Number(document.getElementById('Cep').value.slice(6,9))) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!document.getElementById('Cidade').value || document.getElementById('Cidade').value.length < 3) return alert('A cidade está invalido...')
+    if (!document.getElementById('Bairro').value || document.getElementById('Bairro').value.length < 3) return alert('O Bairro está invalido...')
+    if (!document.getElementById('Endereco').value || document.getElementById('Endereco').value.length < 3) return alert('O Endereço está invalido...')
+    if (!document.getElementById('EndNumero').value || !Number(document.getElementById('EndNumero').value) || document.getElementById('EndNumero').value.length > 5) return alert('O Número está invalido...')
+    if (document.getElementById('EndNumero').value == "0" || document.getElementById('EndNumero').value == "00" || document.getElementById('EndNumero').value == "000" || document.getElementById('EndNumero').value == "0000" || document.getElementById('EndNumero').value == "00000") return alert('O Número está invalido...')
+    document.getElementById('primeiraPagina').style.display = 'none'
+    document.getElementById('segundaPagina').style.display = 'inline'
+  }
+  function voltar() {
+    document.getElementById('segundaPagina').style.display = 'none'
+    document.getElementById('primeiraPagina').style.display = 'inline'
+  }
+  function cadastrar(operador) {
+    if (!operador) return alert('O cadastro automatico não está ativo ainda...')
+    if (document.getElementById('operadores').classList.contains('buttonBlock') || document.getElementById('operadores').classList.contains('buttonBlock')) return alert('Aguarde...')
+    if (!document.getElementById('NomeCliente').value || document.getElementById('NomeCliente').value.length <= 5 || !document.getElementById('NomeCliente').value.includes(" ")) return alert('O nome do cliente está invalido...')
+    if (!document.getElementById('Cpf').value || document.getElementById('Cpf').value.length != 11) return alert('O CPF está invalido...')
+    if (!document.getElementById('rg').value || !Number(document.getElementById('rg').value) || document.getElementById('rg').value.length < 3) return alert('O RG está invalido...')
+    if (!document.getElementById('TelefoneConvenio').value || document.getElementById('TelefoneConvenio').value.length !== 15) return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (document.getElementById('TelefoneConvenio').value.slice(0,1) != "(" || document.getElementById('TelefoneConvenio').value.slice(3,4) != ")" || document.getElementById('TelefoneConvenio').value.slice(4,5) != " " || document.getElementById('TelefoneConvenio').value.slice(5,6) != "9" || document.getElementById('TelefoneConvenio').value.slice(10,11) != "-") return alert('O Telefone está invalido! Exemplo: (00) 90000-0000')
+    if (!document.getElementById('Email').value || !document.getElementById('Email').value.includes('@') || !document.getElementById('Email').value.includes('.com')) return alert('O Email está invalido!')
+    if (!document.getElementById('Datanascimento').value) return alert('A data de nascimento está invalida...')
+    if (!document.getElementById('Cep').value || document.getElementById('Cep').value.length != 9) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!Number(document.getElementById('Cep').value.slice(0,5)) || document.getElementById('Cep').value.slice(5,6) != "-" || !Number(document.getElementById('Cep').value.slice(6,9))) return alert('O CEP está invalido! Exemplo: 00000-000')
+    if (!document.getElementById('Cidade').value || document.getElementById('Cidade').value.length < 3) return alert('A cidade está invalido...')
+    if (!document.getElementById('Bairro').value || document.getElementById('Bairro').value.length < 3) return alert('O Bairro está invalido...')
+    if (!document.getElementById('Endereco').value || document.getElementById('Endereco').value.length < 3) return alert('O Endereço está invalido...')
+    if (!document.getElementById('EndNumero').value || !Number(document.getElementById('EndNumero').value) || document.getElementById('EndNumero').value.length > 5) return alert('O Número está invalido...')
+    if (document.getElementById('EndNumero').value == "0" || document.getElementById('EndNumero').value == "00" || document.getElementById('EndNumero').value == "000" || document.getElementById('EndNumero').value == "0000" || document.getElementById('EndNumero').value == "00000") return alert('O Número está invalido...')
+
+    if (!document.getElementById('NomeMae').value || document.getElementById('NomeMae').value.length <= 5 || !document.getElementById('NomeMae').value.includes(" ")) return alert('O Nome da Mãe está invalido...')
+    if (!document.getElementById('CodBancoCliente').value || !Number(document.getElementById('CodBancoCliente').value)) return alert('O Banco do Cliente está invalido...')
+    if (document.getElementById('CodBancoCliente').value < 10000) return alert('O Banco do Cliente está invalido...')
+    if (!document.getElementById('Agencia').value || document.getElementById('Agencia').value.length != 4) return alert('A agência está invalido...')
+    if (!document.getElementById('ContaCorrente').value) return alert('A Conta está invalido...')
+    if (!document.getElementById('Prazo').value || document.getElementById('Prazo').value < 1 || !document.getElementById('Prazo').value > 99) return alert('A quantidade de parcelas está invalido...')
+    if (!document.getElementById('ValorParcela').value || document.getElementById('ValorParcela').value < 1) return alert('O valor da parcela está invalido...')
+    if (!document.getElementById('Valor').value || document.getElementById('Valor').value < 1) return alert('O valor da AF está invalido...')
+    document.getElementById('cadastrar').classList.add('buttonBlock')
+    document.getElementById('operadores').classList.add('buttonBlock')
+
+    var proposta = {
+      NomeCliente: document.getElementById('NomeCliente').value,
+      Cpf: document.getElementById('Cpf').value,
+      rg: document.getElementById('rg').value,
+      TelefoneConvenio: document.getElementById('TelefoneConvenio').value.replaceAll("-", "").replaceAll(" ", "").replaceAll("(","").replaceAll(")",""),
+      Email: document.getElementById('Email').value,
+      Datanascimento: document.getElementById('Datanascimento').value,
+      Cep: document.getElementById('Cep').value,
+      Cidade: document.getElementById('Cidade').value,
+      Bairro: document.getElementById('Bairro').value,
+      UF: document.getElementById('UF').value,
+      Endereco: document.getElementById('Endereco').value,
+      EndNumero: document.getElementById('EndNumero').value,
+      NomeMae: document.getElementById('NomeMae').value,
+      CodBancoCliente: document.getElementById('CodBancoCliente').value,
+      Agencia: document.getElementById('Agencia').value,
+      ContaCorrente: document.getElementById('ContaCorrente').value,
+      Poupanca: document.getElementById('Poupanca').value,
+      Prazo: document.getElementById('Prazo').value,
+      ValorParcela: document.getElementById('ValorParcela').value,
+      BancoContrato: document.getElementById('BancoContrato').value,
+      Orgao: document.getElementById('Orgao').value,
+      Tabela: document.getElementById('Tabela').value,
+      Valor: document.getElementById('Valor').value,
+    }
+    $.ajax({ type: "post",url: `https://api.concredito.com.br/propostas/create`,
+      data: JSON.stringify({
+        user: localStorage.getItem('user'),
+        password: localStorage.getItem('password'),
+        proposta: proposta,
+        operadores: operadores,
+      }), contentType:"application/json; charset=utf-8",
+      success: async function(s) {
+        document.getElementById('operadores').classList.remove('buttonBlock')
+        if (s.error) return alert(s.error)
+        if (operadores) return alert('Sua proposta foi enviada para os nossos operadores! Aguarde até que eles cadastrem sua proposta no banco...')
+        if (s.text) return alert(text)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
+      },
+      error: function(e) {
+        document.getElementById('operadores').classList.remove('buttonBlock')
+        if (e && e.responseJSON && e.responseJSON.error) return alert(e.responseJSON.error)
+        return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
+      }
+    })
+
+
+  }
+  (function () {
+
+  })();
+</script>
