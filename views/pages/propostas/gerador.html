@@ -13,6 +13,7 @@
             <select id="banks" onchange="setBank(this.value)" class="font-1 font-color" style="cursor: pointer; font-size: 2.3vh; width: 40vw; background: transparent; border:none; border: 0; font-weight: 400;">
               <option value="false" style="color: black;" selected>Não Selecionado</option>
               <option value="BMG" style="color: black; font-weight: 600;" >BMG CARTÃO</option>
+              <option value="PagBank" style="color: black; font-weight: 600;" >PagBank INSS</option>
             </select>
           </fieldset>
         </div>
@@ -52,10 +53,10 @@
   var code2 = false
   function copy(code) {
     if (code == 'code1' && code1) {
-      return navigator.clipboard.writeText(code1);
+      navigator.clipboard.writeText(document.getElementById('code1').value);
       return alert('Codigo[1] copiado com sucesso!')
     } else if (code == 'code2' && code2) {
-      navigator.clipboard.writeText(code2);
+      navigator.clipboard.writeText(document.getElementById('code2').value);
       return alert('Codigo[2] copiado com sucesso!')
     } else return alert('Não tem nenhum codigo aqui para copiar...')
   }
