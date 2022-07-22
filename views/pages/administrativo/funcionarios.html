@@ -83,6 +83,7 @@
             <div style="width: 100%; display: flex; margin-top: 3vh">
               <a id="QuantyFGTS" class="font-size1-5" style="font-size: 2.3vh; width: 70%">Consultas FGTS:</a>
               <div style="width: 30%; display: flex; justify-content: right;">
+                <a onclick="downloadCSV()" class="font-size1-5 font-color-navbar" style="font-size: 2vh; cursor: pointer; text-decoration: underline; margin-right: 2vw">CSV</a>
                 <a onclick="limparFGTS()" class="font-size1-5 font-color-navbar" style="font-size: 2vh; cursor: pointer; text-decoration: underline;">Limpar</a>
               </div>
             </div>
@@ -199,6 +200,21 @@
         return alert(`Ocorreu algum erro indefinido! Tente novamente mais tarde...`)
       },
     })
+  }
+  function downloadCSV() {
+    var i = users.findIndex(r=> r._id == document.getElementById(`funcUser`).value)
+    if (i < 0 || users[i].counts.consultFgts.length <= 0) return alert('A lista está vazia...')
+    var csv = 'Cpf,Banco,Total,Liberado,Data\n';
+    users[i].counts.consultFgts.forEach(function(element) {
+      element.banks.forEach(function(element2) {
+        csv += `${element._id},${element2._id},${element2.saldoTotal},${element2.saldoLiberado},${element2.data}\n`
+      })
+    });
+    var a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    a.target = '_blank';
+    a.download = `FGTS-${document.getElementById(`funcUser`).value}.csv`;
+    a.click();
   }
   function limparFGTS() {
     if (document.getElementById('deletarFuncs').classList.contains('buttonBlock')) return alert('Aguarde...')
